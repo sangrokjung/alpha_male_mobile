@@ -1,183 +1,131 @@
 import 'dart:io';
-import 'Upload.dart';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart'as http ;
-
+import 'package:get/get.dart';
 
 void main(){
   runApp(
       MaterialApp(
-          theme: ThemeData(
-            appBarTheme: AppBarTheme(color:Colors.white10,elevation:0.0),
-          ),
-          home:MainHome()
+          home:MyApp()
       )
   );
 }
 
 
-class MainHome extends StatefulWidget {
-  const MainHome({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+   MyApp({Key? key}) : super(key: key);
+
+
+
+
 
   @override
-  State<MainHome> createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 
-class _MyAppState extends State<MainHome> {
+class _MyAppState extends State<MyApp> {
+  final _MBTI = ["MBTI",'ISTJ','ISTP','INFJ','INTJ','ISFJ','ISFP','INFP','INTP','ESTJ','ESFP','ENFP','ENTP','ESFJ','ESTP','ENFJ','ENTJ'];
+  String? _selectedMBTI = '';
+
+  // final _Age = [
+  //   '10','11','12','13','14','15','16','17','18','19','20',
+  //   '21','22','23','24','25','26','27','28','29','30','31',
+  //   '32','33','34','35','36','37','38','39','40','41','42',
+  //   '43','44','45','46','47','48','49','50','51','52','53',
+  //   '54','55','56','57','58','59','60'];
+  // String _selectedAge = '';
+
   var userImage;
+  var userAge = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Container(width: double.infinity,height: double.infinity,
-        child: Column(
-          mainAxisAlignment:MainAxisAlignment.spaceBetween ,
-          crossAxisAlignment:CrossAxisAlignment.center,
-
-          children:[
-          Container(width:double.infinity ,height:170,margin: EdgeInsets.fromLTRB(0,50,0,0),color: Colors.orange,
-              child: Center(
-                  child:Text('alpha \n male',
-                    style: TextStyle(fontSize: 70,fontFamily:'BebasNeueRegular' ),))),
-
-          Container(width:double.infinity ,height:80,color: Colors.blue,
-              child: Center(child: SizedBox(child: TextField(),width:100,),)),
-          Container(width:double.infinity ,height:80,color: Colors.yellow,
-              child: Center(child: SizedBox(child: TextField(),width: 100),)),
-          Container(width: 100,height:50,color: Colors.deepOrange,
-            child:Align(
-                alignment: Alignment.bottomCenter,
-                child:Text("다하면 다음으로")),)
-        ],),
-      )
-       
-
-
-            // Column(
-            //   children: [
-            //     SizedBox(child: TextField(),width: 200),
-            //     SizedBox(child: TextField(),width: 200)],
-            // ),
-
-          // Row(mainAxisAlignment: MainAxisAlignment.center,
-          //         children:[
-          //           TextButton(onPressed: (){
-          //             Navigator.push(context,MaterialPageRoute(
-          //                 builder: (c)=>SelectPage())
-          //             );
-          //           }, child: Text('전체 확인후 넘김')),
-          //         ])
-
-
-    );
+  void initState() {
+    super.initState();
+    setState(() {
+      _selectedMBTI = _MBTI[0];
+      // _selectedAge = _Age[0];
+    });
   }
-}
 
 
 
 
 
-
-class SelectPage extends StatefulWidget {
-  const SelectPage({Key? key}) : super(key: key);
-
-  @override
-  State<SelectPage> createState() => _SelectPageState();
-}
-
-class _SelectPageState extends State<SelectPage> {
-  var userImage;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Column(
         children: [
+          Expanded(
+            child: Container(margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Align(alignment: Alignment.center,
+                  child: Text('alpha\nfinder',style:TextStyle(fontSize: 100),)),
+              color: Colors.red,
+            ),
+            flex: 5,
+          ),
+          Expanded(child: Container(color: Colors.yellow,child: Text("Age와MBTI를 입력후\n다음 버튼을 눌러주세요",style: TextStyle(fontSize: 20),),alignment: Alignment.center),flex: 2),
+          // Expanded(child: Container(color: Colors.cyanAccent),flex: 1),
+          Expanded(child: Container(color: Colors.deepPurple.shade50,child: Text("Age와MBTI를 입력후\n다음 버튼을 눌러주세요",style: TextStyle(fontSize: 20),),alignment: Alignment.center),flex: 1),
 
-          TextButton(onPressed: ()async{
-            var picker = ImagePicker();
-            var image = await picker.pickImage(source: ImageSource.camera);
+          Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.center,
+            children: [Container(color: Colors.cyanAccent,
 
-            if(image != null) {
-              setState(() {
-                userImage = File(image.path);
-              });
-            }
-            Navigator.push(context,
-                MaterialPageRoute(builder: (c)=>Upload(userImage:userImage))
-            );
 
-          }, child: Text("camera")),
-          TextButton(onPressed: ()async{
-            var picker = ImagePicker();
-            var image = await picker.pickImage(source: ImageSource.gallery);
+          ),
 
-            if(image != null) {
-              setState(() {
-                userImage = File(image.path);
-              });
-            }
-            Navigator.push(context,
-                MaterialPageRoute(builder: (c)=>Upload(userImage:userImage))
-            );
 
-          }, child: Text("gallery")),
+              Container(color: Colors.green,width: 100,
+                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Your MBTI"),
+                    DropdownButton(
+                      value: _selectedMBTI,
+                      items: _MBTI.map(
+                              (value){
+                                return DropdownMenuItem(
+                                  value:value,
+                                  child: Text(value),
+                                );
+                              }
+                              ).toList(),
+                      onChanged: (value){
+                        setState(() {
+                          _selectedMBTI = value;
 
+                        });
+                      },
+                    ),
+                  ],
+                ),
+
+              ),
+            ],
+          ),flex: 2),
+
+          Expanded(
+            child: Container(
+              color: Colors.brown,
+              alignment: Alignment.topCenter,
+              child:TextButton(
+                  onPressed:(){
+                    print("확인");
+                    print(_selectedMBTI);
+
+                  },
+                  child:Text("다음")),
+
+              // color: Colors.green,
+            ),
+            flex: 1,
+          ),
         ],
       ),
     );
   }
 }
 
-class Upload extends StatelessWidget {
-  const Upload({Key? key,this.userImage}) : super(key: key);
-  final userImage ;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        crossAxisAlignment:CrossAxisAlignment.start,
-        children: [
-
-          Image.file(userImage),
-          TextButton(onPressed: (){
-
-          //  업로드버튼 누르면 서버로 넘김
-            //그리고 결과창 으로 넘김
-            Navigator.push(context,
-                MaterialPageRoute(builder: (c)=>ResultPage())
-            );
-
-          }, child: Text("업로드"))
-        ],
-      ),
-    );
-  }
-}
-
-
-
-
-
-
-class ResultPage extends StatefulWidget {
-  const ResultPage({Key? key}) : super(key: key);
-
-  @override
-  State<ResultPage> createState() => _ResultPageState();
-}
-
-class _ResultPageState extends State<ResultPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Text('결과창'),
-    );
-  }
-}

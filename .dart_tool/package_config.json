@@ -80,6 +80,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "get",
+      "rootUri": "file:///C:/Users/Playdata/AppData/Local/Pub/Cache/hosted/pub.dev/get-4.6.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "http",
       "rootUri": "file:///C:/Users/Playdata/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.5",
       "packageUri": "lib/",
@@ -224,7 +230,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-02-02T04:54:31.899030Z",
+  "generated": "2023-02-03T06:15:05.021348Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }
