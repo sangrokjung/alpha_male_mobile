@@ -176,7 +176,7 @@ class CamPage extends StatefulWidget {
 }
 class _CamPageState extends State<CamPage> {
   var userImage;
-  List<String> userImagePath =[];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -191,12 +191,10 @@ class _CamPageState extends State<CamPage> {
                     if (image != null){
                       setState(() {
                         userImage = File(image.path);
-                        userImagePath.add(userImage.path);
-
                       });
                     }
                     Navigator.push(context,
-                        MaterialPageRoute(builder:(c){return UploadPage(userImage: userImage,userImagePath:userImagePath);
+                        MaterialPageRoute(builder:(c){return UploadPage(userImage: userImage,);
                         }));
 
                   },
@@ -212,12 +210,10 @@ class _CamPageState extends State<CamPage> {
                       if(image != null){
                         setState(() {
                           userImage = File(image.path);
-                          userImagePath.add(userImage.path);
-
                         });
                       }
                       Navigator.push(context,
-                          MaterialPageRoute(builder:(c){return UploadPage(userImage: userImage,userImagePath:userImagePath);
+                          MaterialPageRoute(builder:(c){return UploadPage(userImage: userImage,);
                           }));
 
 
@@ -239,9 +235,8 @@ class _CamPageState extends State<CamPage> {
 
 //업로드 페이지
 class UploadPage extends StatelessWidget {
-  UploadPage({Key? key,this.userImage,required this.userImagePath}) : super(key: key);
+  const UploadPage({Key? key,this.userImage}) : super(key: key);
   final userImage;
-  List<String> userImagePath = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -258,7 +253,7 @@ class UploadPage extends StatelessWidget {
                 // 그리고 보낸 사진이 서버에서 처리 되어서 돌아오면 결과창을 띄어야함
                 // 이 것들이 아니라면 로딩 아이콘을 띄워야함
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (c){return ResultPage(userImage:userImage,userImagePath:userImagePath);}));
+                    MaterialPageRoute(builder: (c){return ResultPage(userImage:userImage);}));
 
 
               },child: Text('이미지 업로드 화면')),
@@ -277,13 +272,8 @@ class UploadPage extends StatelessWidget {
 
 
 class ResultPage extends StatelessWidget {
-  ResultPage({Key? key,this.userImage,required this.userImagePath}) : super(key: key);
+  const ResultPage({Key? key,this.userImage}) : super(key: key);
   final userImage;
-  List<String> userImagePath = [];
-  String text = "";
-  String subject = "";
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -302,11 +292,16 @@ class ResultPage extends StatelessWidget {
               ],),
               Row(mainAxisAlignment: MainAxisAlignment.center,children: [
                 Container(width: 100,height: 100,color: Colors.amber,
-                  child:TextButton(onPressed: (){
+                  child:TextButton(onPressed: ()async{
 
 
-                    //스크린샷 후 저장된 파일 전달
-                    Share.shareFiles([userImagePath[0]],text:text,subject: subject);
+
+                    // Share.share('캡쳐한 위젯 이미지 공유');
+
+
+
+
+
                   }, child: Text("공유버튼 아이콘")) ,)
               ],)
             ],
@@ -314,10 +309,7 @@ class ResultPage extends StatelessWidget {
 
         )
     );
-  } void share(){
-    Share.shareXFiles(userImage);
   }
-
 }
 
 
