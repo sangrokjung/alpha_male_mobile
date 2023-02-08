@@ -1,8 +1,15 @@
+import 'dart:typed_data';
+
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+
+
 
 
 
@@ -162,11 +169,6 @@ class _MyAppState extends State<MyApp> {
 
 
 
-
-
-
-
-
 //카메라 앨범 스테이트 페이지
 
 class CamPage extends StatefulWidget {
@@ -275,50 +277,58 @@ class UploadPage extends StatelessWidget {
 
 
 
-
 class ResultPage extends StatelessWidget {
   ResultPage({Key? key,this.userImage,required this.userImagePath}) : super(key: key);
   final userImage;
   List<String> userImagePath = [];
   String text = "";
   String subject = "";
-
+  final controller = ScreenshotController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body:Container(height:double.infinity,width: double.infinity,color: Colors.green,
-          child: Column(
-            children: [
-              Container(color: Colors.yellow,width: 300,height: 300,alignment: Alignment.bottomCenter,margin: EdgeInsets.all(70.0)),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
-                Container(color: Colors.deepPurple,height: 100,width: 100,),
-                Container(color: Colors.deepPurple,height: 100,width: 100,),
-              ]),
-              SizedBox(height: 40,),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
-                Container(color: Colors.blue,height: 100,width: 100,),
-                Container(color: Colors.blue,height: 100,width: 100,),
-              ],),
-              Row(mainAxisAlignment: MainAxisAlignment.center,children: [
-                Container(width: 100,height: 100,color: Colors.amber,
-                  child:TextButton(onPressed: (){
+    return Screenshot(
+      controller: controller,
+      child: Scaffold(
+          body:Container(height:double.infinity,width: double.infinity,color: Colors.green,
+            child: Column(
+              children: [
+                Container(color: Colors.yellow,width: 300,height: 300,alignment: Alignment.bottomCenter,margin: EdgeInsets.all(70.0)),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+                  Container(color: Colors.deepPurple,height: 100,width: 100,),
+                  Container(color: Colors.deepPurple,height: 100,width: 100,),
+                ]),
+                SizedBox(height: 40,),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+                  Container(color: Colors.blue,height: 100,width: 100,),
+                  Container(color: Colors.blue,height: 100,width: 100,),
+                ],),
+                SizedBox(height: 20,),
+                Row(mainAxisAlignment: MainAxisAlignment.center,children: [
+                  Container(width: 100,height: 100,color: Colors.amber,
+                    child: TextButton(onPressed: ()async{
+                      final screenImage = await controller.capture();
 
+                      saveAndShare(screenImage!);
+                    },child: Text(''))
+                  )
+                ],)
+              ],
+            ),
 
-                    //스크린샷 후 저장된 파일 전달
-                    Share.shareFiles([userImagePath[0]],text:text,subject: subject);
-                  }, child: Text("공유버튼 아이콘")) ,)
-              ],)
-            ],
-          ),
-
-        )
+          )
+      ),
     );
-  } void share(){
-    Share.shareXFiles(userImage);
-  }
 
+  }
+  Future saveAndShare(Uint8List bytes) async{
+    final dicectory = await getApplicationDocumentsDirectory();
+    final screenImage = File('${dicectory.path}/flutter.png');
+    screenImage.writeAsBytesSync(bytes);
+    await Share.shareFiles([screenImage.path]);
+  }
 }
+
 
 
 
