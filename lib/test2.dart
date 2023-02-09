@@ -6,7 +6,7 @@ import 'package:share_plus/share_plus.dart';
 
 
 
-import './camerapage.dart';
+// import './camerapage.dart';
 import 'package:http/http.dart'as http ;
 import 'package:get/get.dart';
 

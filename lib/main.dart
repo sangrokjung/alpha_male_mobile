@@ -1,7 +1,5 @@
 
 import 'dart:typed_data';
-
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -10,17 +8,20 @@ import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import './dioserver.dart';
 
 
-import './camerapage.dart';
-import 'package:http/http.dart'as http ;
-import 'package:get/get.dart';
 
 
-void main(){
+
+
+
+void main() async{
+
+
+
+
+
   runApp(
       MaterialApp(
         home:MyApp(),
@@ -231,7 +232,9 @@ class _CamPageState extends State<CamPage> {
 
             Expanded(// 뭐할지 고민
                 child: Container(color: Colors.green,width: double.infinity,
-                  child: MaterialButton(onPressed: (){},
+                  child: MaterialButton(onPressed: (){
+                    server.getReq();
+                  },
                       child: Text('뭐할까 뒤로가기?',style: TextStyle(fontSize: 40),)),),flex: 2),
           ],
         )
