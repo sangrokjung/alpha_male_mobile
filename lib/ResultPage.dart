@@ -1,21 +1,44 @@
 import 'dart:typed_data';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
 import 'dart:io';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
-import './dioserver.dart';
+
+
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+// import 'package:dio/dio.dart';
+// import './dioserver.dart';
 
 
 
 
-class GetConForm extends StatelessWidget {
+class GetConForm extends StatefulWidget {
   GetConForm({Key? key}) : super(key: key);
+
+  @override
+  State<GetConForm> createState() => _GetConFormState();
+}
+
+class _GetConFormState extends State<GetConForm> {
   @override
 
-  
+  var resultImage;
+
+
+
+  getDate()async{
+    var url2 =await http.get(Uri.parse('https://codingapple1.github.io/app/data.json'));
+    var data =await jsonDecode(url2.body);
+
+    setState(() {
+      resultImage = data;
+    });
+
+  }
 
   Widget build(BuildContext context) {
     return Dialog(alignment: Alignment.center,
@@ -23,30 +46,33 @@ class GetConForm extends StatelessWidget {
           child: Column(mainAxisAlignment: MainAxisAlignment.center,
               children:[Text('결과를 확인하시겠습니까?',style: TextStyle(fontSize:20)),
                 SizedBox(height: 15,),
+                TextButton(onPressed: (){
+                  print(resultImage);
+
+
+                  }, child: Text('check')),
+
                 TextButton(
                   onPressed:()async{
-                    await server.getReq();
-
+                    await getDate();
 
 
                     Navigator.push(context,
                         MaterialPageRoute(builder:(c){
-                          return ResultPage();
+                          return ResultPage(resultImage:resultImage);
                         }));
     }, child: Text('결과창으로'))]),) );
   }
 }
 
-class ResultPage extends StatefulWidget {
-  ResultPage({Key? key}) : super(key: key);
+class ResultPage extends StatelessWidget {
+  ResultPage({Key? key,this.resultImage}) : super(key: key);
+  final resultImage;
 
-  @override
-  State<ResultPage> createState() => _ResultPageState();
-}
+  var userImage;
 
-class _ResultPageState extends State<ResultPage> {
-  String text = "";
-  String subject = "";
+
+  // String text = "";
   final controller = ScreenshotController();
 
   @override
@@ -57,9 +83,15 @@ class _ResultPageState extends State<ResultPage> {
           body:Container(height:double.infinity,width: double.infinity,color: Colors.green,
             child: Column(
               children: [
-                Container(color: Colors.yellow,width: 300,height: 300,alignment: Alignment.bottomCenter,margin: EdgeInsets.all(70.0),),
+                Container(color: Colors.yellow,width: 300,height: 300,alignment: Alignment.bottomCenter,margin: EdgeInsets.all(70.0),
+                    child:TextButton(onPressed: (){
+                  print(resultImage[0]['image']);
+
+
+                }, child: Text('경로확인'))),
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
-                  Container(color: Colors.deepPurple,height: 100,width: 100,),
+                  Container(color: Colors.deepPurple,height: 100,width: 100,
+                    child: Image.network(resultImage[0]['image']),),
                   Container(color: Colors.deepPurple,height: 100,width: 100,),
                 ]),
                 SizedBox(height: 40,),

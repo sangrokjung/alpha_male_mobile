@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import './dioserver.dart';
+
 import './ResultPage.dart';
-import './main.dart';
+
+import 'package:http/http.dart' as http;
+
+// import './dioserver.dart';
 
 
 
@@ -28,10 +33,18 @@ class UploadPage extends StatelessWidget {
 
                 Navigator.pop(context);
               },child: Text('뒤로가기')),
+
+
               TextButton(onPressed: ()async{
-                await server.postReq(userImage:userImage,selectedMBTI:selectedMBTI,selectedDate:selectedDate);
-
-
+                // await server.postReq(userImage:userImage,selectedMBTI:selectedMBTI,selectedDate:selectedDate);
+                final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
+                final response = await http.post(url,
+                     headers: <String, String>{
+                      'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body:jsonEncode({"userImage":'$userImage', 'mbti':'$selectedMBTI','age':'$selectedDate'}));
+                print('Response status: ${response.statusCode}');
+                print('Response body: ${response.body}');
                 // mbti age image 전송(post) 해야함
                 // 그리고 보낸 사진이 서버에서 처리 되어서 돌아오면 결과창을 띄어야함
                 // 이 것들이 아니라면 로딩 아이콘을 띄워야함
