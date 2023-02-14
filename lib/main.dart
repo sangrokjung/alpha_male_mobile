@@ -1,6 +1,20 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import './campage.dart';
+
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
 
 
 void main() async{
@@ -52,72 +66,220 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  var userImage;
+  List<String> userImagePath =[];
+
+
+  var resultImage;
+
+  getDate()async{
+    var url2 =await http.get(Uri.parse('https://codingapple1.github.io/app/data.json'));
+    var data =await jsonDecode(url2.body);
+
+
+    setState(() {
+      resultImage = data;
+      print(resultImage);
+    });
+
+  }
+
+  final urlImages= [
+    'https://t1.daumcdn.net/news/202210/04/kukinews/20221004152604048swko.jpg',
+    'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/15/mydaily/20230115054859216prji.jpg',
+
+  ];
+
+
+
 //여기부터 메인 홈페이지 시작
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(color:Colors.black38,width: double.infinity,height: double.infinity,
-        child: Column(
+      appBar: AppBar(title: Text('alpha finder'),
+          actions:[
+            IconButton(onPressed: ()async{
+              var picker = ImagePicker();
+              var image = await picker.pickImage(source: ImageSource.camera);
+              if(image != null){
+                userImage = File(image.path);
+                userImagePath.add(userImage.path);
+              }
+            }, icon: Icon(Icons.camera_alt_outlined)),
+
+            IconButton(onPressed: ()async{
+              var picker = ImagePicker();
+              var image = await picker.pickImage(source: ImageSource.gallery);
+              if (image != null){
+                userImage = File(image.path);
+                userImagePath.add(userImage.path);
+              }
+            }, icon: Icon(Icons.photo_album_outlined))]),
+
+
+
+
+
+      body: Container(
+        color:Colors.black38,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,
           children:[
-            SizedBox(height: 100,),
-            //메인 로고,이름
-            Container(
-                decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.circular(50)),
-                child:Column(
-                  children:[Text('alpha\nfinder',style:TextStyle(fontSize:100),textAlign:TextAlign.center)])),
+            SizedBox(height:30),
+            CarouselSlider(
+              options: CarouselOptions(height: 400.0),
+              items: urlImages.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(color: Colors.blue
+                        ),
+                        child: Image.network(i),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
 
 
-            //설명란?
-          Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
-            width: 300,
-            decoration: BoxDecoration( color: Colors.yellow,borderRadius: BorderRadius.circular(20)),
-              child:Text("사용법\nAge 와 MBTI를 입력후\n다음 버튼을 눌러주세요",style:TextStyle(fontSize: 25),textAlign: TextAlign.center
-                ,),alignment: Alignment.center),
+            // 어플 예시 사진
+
+
+
+            SizedBox(height: 50),
             //날짜 버튼
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children:[
+                Container(color: Colors.deepPurple.shade50,height: 75,width: 150,
+                   child:MaterialButton(onPressed:_showDatePicker,
+                       child:Padding(padding: EdgeInsets.all(0.0),
+                           child: Text("Your Age",style:TextStyle(color:Colors.black,fontSize: 25))))),
+                //mbti 버튼
+                Container(color: Colors.green,width: 150,
+                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+                          Text("Your MBTI",style:TextStyle(color: Colors.black,fontSize: 25)),
+                          DropdownButton(style:TextStyle(fontSize: 25,color: Colors.black,),
+                              value: selectedMBTI, items: MBTI.map((value)
+                              {return DropdownMenuItem(
+                                value:value,
+                                child: Text(value));
+                              }).toList(),onChanged: (value){setState(() {selectedMBTI = value!;});})])),
+              ],
+            ),
 
-           Container(color: Colors.deepPurple.shade50,
-               child:MaterialButton(onPressed:_showDatePicker,
-                   child: Padding(padding: EdgeInsets.all(20.0),
-                       child: Text("Your Age",style:TextStyle(color:Colors.black,fontSize: 25))))),
+            SizedBox(height: 50),
 
-            //mbti 버튼
-
-            Container(color: Colors.green,width: 170,
-                child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                    children:[
-                      Text("Your MBTI",style:TextStyle(color: Colors.black,fontSize: 25)),
-                      DropdownButton(style:TextStyle(fontSize: 25,color: Colors.black,),
-                          value: selectedMBTI, items: MBTI.map((value)
-                          {return DropdownMenuItem(
-                            value:value,
-                            child: Text(value));
-                          }).toList(),onChanged: (value){setState(() {selectedMBTI = value!;});})]))
-              ,
-
-            //확인,다음 버튼, 카메라 앨범으로
 
             Container(
               color: Colors.brown,width: 170,
-              child:MaterialButton(onPressed:(){
-                if((selectedMBTI!=null) & (selectedDate != null) & (selectedMBTI != MBTI[0])){
+              child:MaterialButton(onPressed:()async{
+                if((selectedMBTI!=null) & (selectedDate != null) & (selectedMBTI != MBTI[0]) &(userImage != null) ){
                   // 테스트 끝나면 지울껏들
                   print("정상");
                   print(selectedMBTI);
                   print(selectedDate);
+                  print(userImage);
                   //끝
+                  final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
+                  final response = await http.post(url,
+                      headers: <String, String>{
+                    'Content-Type':'application/json; charset=UTF-8',
+                      },
+                      body: jsonEncode({"userImage":'$userImage',"mbti":'$selectedMBTI','age':'$selectedDate'}));
+                  print('Response status: ${response.statusCode}');
+                  print('Response body: ${response.body}');
+                  await getDate();
 
                   Navigator.push(context,
                       MaterialPageRoute(builder:(c){
-                        return CamPage(selectedMBTI:selectedMBTI,selectedDate:selectedDate);}));
+                        return ResultPage(resultImage:resultImage);}));
+
 
                 }else //입력 안한경우 팝업창
                   showDialog(context: context, builder: (context){
-                    return Dialog(child:Text('반드시 당신의 MBTI와 생년월일을 선택해주세요'));
+                    return Dialog(child:Text('반드시 당신의 MBTI,생년월일,사진을 선택해주세요'));
                   });
-              },
+
+
+                },
                   child:Padding(padding: EdgeInsets.all(20.0),
                     child: Text("시작하기",style: TextStyle(fontSize: 25)),)),
-            ),],),
+            ),
+          Container(child: TextButton(onPressed: (){
+
+
+            getDate();
+
+          },child: Text('check'),),),
+          Container(child: TextButton(onPressed: ()async{
+
+
+            final url = Uri.parse('https://2lcw5t4u2g.execute-api.ap-northeast-2.amazonaws.com/test-http-function');
+            final response = await http.delete(url,
+                headers: <String, String>{
+                  'Content-Type':'application/json; charset=UTF-8',
+                },
+                body: jsonEncode({"userImage":'$userImage',"mbti":'$selectedMBTI','age':'$selectedDate'}));
+            print('Response status: ${response.statusCode}');
+
+
+          }, child: Text('del')),)],),
       ),);}}
+
+
+
+
+
+class ResultPage extends StatelessWidget {
+  ResultPage({Key? key, this.resultImage}) : super(key: key);
+  final resultImage;
+  final controller = ScreenshotController();
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Screenshot(
+      controller: controller,
+      child: Scaffold(
+          appBar: AppBar(),
+          body: Container(color: Colors.yellow,
+            height: double.infinity,
+            width: double.infinity,
+            child: Column(children: [
+              SizedBox(height: 40,),
+              Container(color: Colors.cyanAccent, width: 300, height: 300,
+
+                  child: Image.network(resultImage[0]['image'])),
+
+              SizedBox(height: 40,),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(width: 100, height: 100, color: Colors.deepPurple,),
+                  Container(width: 100, height: 100, color: Colors.deepPurple,),
+                ],),
+              SizedBox(height: 40,),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(width: 100, height: 100, color: Colors.deepPurple,),
+                  Container(width: 100, height: 100, color: Colors.deepPurple,),
+                ],),
+              SizedBox(height: 25,),
+              Container(height: 100, width: 100, color: Colors.cyan,
+                child: IconButton(onPressed: () async {
+                  final screenImage = await controller.capture();
+                  saveAndShare(screenImage!);
+                }, icon: Icon(Icons.share_outlined)),)
+            ]),)
+      ),
+    );
+  }
+
+  Future saveAndShare(Uint8List bytes) async {
+    final dicectory = await getApplicationDocumentsDirectory();
+    final screenImage = File('${dicectory.path}/flutter.png');
+    screenImage.writeAsBytesSync(bytes);
+    await Share.shareFiles([screenImage.path]);
+  }
+}
