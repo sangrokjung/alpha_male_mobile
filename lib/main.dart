@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
+
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 
 import 'dart:io';
@@ -33,7 +35,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<String> imagePaths =[];
+
   // mbti 선택 시작
   final MBTI = ["MBTI",'ISTJ','ISTP','INFJ','INTJ','ISFJ','ISFP','INFP','INTP','ESTJ','ESFP','ENFP','ENTP','ESFJ','ESTP','ENFJ','ENTJ'];
   var selectedMBTI = '';
@@ -66,8 +68,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  var userImage;
-  List<String> userImagePath =[];
+  var UserImagePath;
+  List<String> userImagePaths =[];
 
 
   var resultImage;
@@ -79,42 +81,69 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       resultImage = data;
-      print(resultImage);
     });
 
   }
 
+
+
+  postData(){}
   final urlImages= [
     'https://t1.daumcdn.net/news/202210/04/kukinews/20221004152604048swko.jpg',
     'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/15/mydaily/20230115054859216prji.jpg',
 
   ];
 
+      Future PostImage() async {
+
+      List<int> imageBytes = UserImagePath.readAsBytesSync();
+      String base64Image = base64Encode(imageBytes);
+
+
+      Uri url = Uri.parse('https://jsonplaceholder.typicode.com/albums');
+      http.Response response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; sharset=UTF-8',
+      }, //this. header is essential to send json data
+        body: jsonEncode([
+          {'age':selectedDate,'mbti':selectedMBTI,'usesImage':base64Image}
+        ])
+      );
+      print(response.body);
+      print(response.statusCode);
+      // print(response.body);
+  }
 
 
 //여기부터 메인 홈페이지 시작
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('alpha finder'),
+      appBar: AppBar(title:const Text('alpha finder'),
           actions:[
             IconButton(onPressed: ()async{
+
               var picker = ImagePicker();
-              var image = await picker.pickImage(source: ImageSource.camera);
-              if(image != null){
-                userImage = File(image.path);
-                userImagePath.add(userImage.path);
-              }
-            }, icon: Icon(Icons.camera_alt_outlined)),
+              final XFile? image = await picker.pickImage(source: ImageSource.camera);
+              //TO convert Xfile into file
+
+              File file = File(image!.path);
+              UserImagePath = file;
+              print(UserImagePath);
+
+
+
+
+            }, icon:const Icon(Icons.camera_alt_outlined)),
 
             IconButton(onPressed: ()async{
               var picker = ImagePicker();
               var image = await picker.pickImage(source: ImageSource.gallery);
               if (image != null){
-                userImage = File(image.path);
-                userImagePath.add(userImage.path);
+                UserImagePath = File(image.path);
+                userImagePaths.add(UserImagePath.path);
               }
-            }, icon: Icon(Icons.photo_album_outlined))]),
+            }, icon:const Icon(Icons.photo_album_outlined))]),
 
 
 
@@ -125,7 +154,7 @@ class _MyAppState extends State<MyApp> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center,
           children:[
             SizedBox(height:30),
-            CarouselSlider(
+            CarouselSlider( //메인 개발자 결과 슬라이드로 보여주기
               options: CarouselOptions(height: 400.0),
               items: urlImages.map((i) {
                 return Builder(
@@ -174,58 +203,73 @@ class _MyAppState extends State<MyApp> {
 
             Container(
               color: Colors.brown,width: 170,
-              child:MaterialButton(onPressed:()async{
-                if((selectedMBTI!=null) & (selectedDate != null) & (selectedMBTI != MBTI[0]) &(userImage != null) ){
-                  // 테스트 끝나면 지울껏들
-                  print("정상");
-                  print(selectedMBTI);
-                  print(selectedDate);
-                  print(userImage);
-                  //끝
-                  final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
-                  final response = await http.post(url,
-                      headers: <String, String>{
-                    'Content-Type':'application/json; charset=UTF-8',
-                      },
-                      body: jsonEncode({"userImage":'$userImage',"mbti":'$selectedMBTI','age':'$selectedDate'}));
-                  print('Response status: ${response.statusCode}');
-                  print('Response body: ${response.body}');
-                  await getDate();
-
-                  Navigator.push(context,
-                      MaterialPageRoute(builder:(c){
-                        return ResultPage(resultImage:resultImage);}));
+              child:Column(
+                children: [
 
 
-                }else //입력 안한경우 팝업창
-                  showDialog(context: context, builder: (context){
-                    return Dialog(child:Text('반드시 당신의 MBTI,생년월일,사진을 선택해주세요'));
-                  });
+                  MaterialButton(onPressed:()async{
 
 
-                },
-                  child:Padding(padding: EdgeInsets.all(20.0),
-                    child: Text("시작하기",style: TextStyle(fontSize: 25)),)),
+                    if((selectedMBTI!=null) & (selectedDate != null) & (selectedMBTI != MBTI[0]) &(UserImagePath != null) ){
+
+
+                     await PostImage();
+
+
+                      // var request = new http.MultipartRequest('POST', Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+                      // request.fields['age'] = '$selectedDate';
+                      // request.fields['mbti'] = '$selectedMBTI';
+                      //
+                      // request.files.add(await http.MultipartFile.fromPath('userImage.png',UserImagePath));
+                      //
+                      //
+                      //
+                      //
+                      // var res = await request.send();
+                      // print(res.statusCode);
+
+
+
+
+
+                      // final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
+                      // //요청에 이미지 파일 추가
+                      // final response = await http.post(url,
+                      //     headers: <String, String>{
+                      //   'Content-Type':'application/json; charset=UTF-8',
+                      //     },
+                      //     body: jsonEncode({"userImage":'$UserImagePath',"mbti":'$selectedMBTI','age':'$selectedDate'}));
+                      // print('Response status: ${response.statusCode}');
+                      // print('Response body: ${response.body}');
+
+
+                      await getDate();
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder:(c){
+                            return ResultPage(resultImage:resultImage);}));
+
+
+                    }else //입력 안한경우 팝업창
+                      showDialog(context: context, builder: (context){
+                        return Dialog(child:Text('반드시 당신의 MBTI,생년월일,사진을 선택해주세요',textAlign:TextAlign.center,style: TextStyle(fontSize: 30),));
+                      });
+
+
+                    },
+                      child:Padding(padding: EdgeInsets.all(20.0),
+                        child: Text("시작하기",style: TextStyle(fontSize: 25)),)),
+                ],
+              ),
             ),
           Container(child: TextButton(onPressed: (){
 
 
-            getDate();
+            print(UserImagePath);
+          },child: Text('check'),
 
-          },child: Text('check'),),),
-          Container(child: TextButton(onPressed: ()async{
+          ),),],),
 
-
-            final url = Uri.parse('https://2lcw5t4u2g.execute-api.ap-northeast-2.amazonaws.com/test-http-function');
-            final response = await http.delete(url,
-                headers: <String, String>{
-                  'Content-Type':'application/json; charset=UTF-8',
-                },
-                body: jsonEncode({"userImage":'$userImage',"mbti":'$selectedMBTI','age':'$selectedDate'}));
-            print('Response status: ${response.statusCode}');
-
-
-          }, child: Text('del')),)],),
       ),);}}
 
 
@@ -283,3 +327,6 @@ class ResultPage extends StatelessWidget {
     await Share.shareFiles([screenImage.path]);
   }
 }
+
+
+
