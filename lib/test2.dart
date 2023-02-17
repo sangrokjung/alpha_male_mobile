@@ -34,6 +34,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+
 class _MyAppState extends State<MyApp> {
 
   // mbti 선택 시작
@@ -81,7 +82,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       resultImage = data;
     });
-
+    print(resultImage);
   }
 
 
@@ -334,9 +335,9 @@ class _MyAppState extends State<MyApp> {
                       showDialog(context: context, builder: (context){
                         return Dialog(child:Text('반드시 당신의 MBTI,생년월일,사진을 선택해주세요',textAlign:TextAlign.center,style: TextStyle(fontSize: 30),));
                       });
-
-
                   },
+
+
                       child:Padding(padding: EdgeInsets.all(20.0),
                         child: Text("시작하기",style: TextStyle(fontSize: 25)),)),
                 ],
