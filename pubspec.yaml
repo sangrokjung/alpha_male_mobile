@@ -107,7 +107,14 @@ flutter:
 #         - asset: fonts/TrajanPro_Bold.ttf
 #           weight: 700
 #
+  fonts:
+    - family: Alegreya-VariableFont_wght
+      fonts:
+        - asset: fonts/Alegreya-VariableFont_wght.ttf
 
+    - family: Kosugi-Regular
+      fonts:
+        - asset: fonts/Kosugi-Regular.ttf
 
 
   #
