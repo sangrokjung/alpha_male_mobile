@@ -1,21 +1,16 @@
 import 'dart:typed_data';
-
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:intl/intl.dart';
-
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 
 
@@ -23,7 +18,14 @@ void main() async{
   runApp(
       MaterialApp(
         home:MyApp(),
+        theme:ThemeData(
+          appBarTheme: AppBarTheme(color: Colors.black), fontFamily: "Castoro-Regular",
+          textTheme: TextTheme(bodyText2: TextStyle(fontFamily: "Roboto-Regular"),),
+          bottomAppBarTheme:BottomAppBarTheme(color: Colors.black),
+          scaffoldBackgroundColor: Colors.black,
 
+
+        ),
       )
   );
 }
@@ -32,70 +34,211 @@ class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
   @override
   State<MyApp> createState() => _MyAppState();
+}class _MyAppState extends State<MyApp> {
+  var UserImagePath;
+
+
+
+//여기부터 메인 홈페이지 시작
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+        appBar: AppBar(
+
+            actions: [
+              IconButton(onPressed: ()async{
+
+                var picker = ImagePicker();
+                final XFile? image = await picker.pickImage(source: ImageSource.camera);
+                //TO convert Xfile into file
+
+                File file = File(image!.path);
+                UserImagePath = file;
+                print(UserImagePath);
+
+                if(UserImagePath != null){
+                  Navigator.push(context, MaterialPageRoute(builder: (c){
+                    return SelectPage(UserImagePath:UserImagePath);
+                  }));
+                } else
+                  showDialog(context: context, builder: (context){
+                    return Dialog(child:Text('사진을 찍거나 또는 앨범에서 사진을 선택해주세요',textAlign:TextAlign.center,style: TextStyle(fontSize: 30),));
+                  });
+
+
+              }, icon: Icon(Icons.camera_alt)),
+              IconButton(onPressed: ()async{
+
+                var picker = ImagePicker();
+                final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                //TO convert Xfile into file
+
+                File file = File(image!.path);
+                UserImagePath = file;
+                print(UserImagePath);
+
+                if(UserImagePath != null){
+                  Navigator.push(context, MaterialPageRoute(builder: (c){
+                    return SelectPage(UserImagePath:UserImagePath);
+                  }));
+                } else
+                  showDialog(context: context, builder: (context){
+                    return Dialog(child:Text('사진을 찍거나 또는 앨범에서 사진을 선택해주세요',textAlign:TextAlign.center,style: TextStyle(fontSize: 30),));
+                  });
+
+
+              }, icon: Icon(Icons.photo)),
+            ],title: Text('     Alpha-male',)),
+        body:ListView(children:[
+          Center(child:
+          Column(children:[
+            SizedBox(height: 30,),
+            Container(child: Text('Developers Test Image',style: TextStyle(color: Colors.white,fontSize: 30,)),),
+
+            SizedBox(height: 15,),
+            ShowDeveloper(DvevloperImage:'assets/sang.jpg',giho:'γ',rule:'Part: Back-End',classfi:'Class: Gamma'),
+
+            SizedBox(height: 15,),
+            ShowDeveloper(DvevloperImage:'assets/han.jpg',giho:'γ',rule: 'Part: Front-End',classfi:'Class: Gamma'),
+
+            SizedBox(height: 15,),
+            ShowDeveloper(DvevloperImage:'assets/won.jpg',giho:'δ',rule: 'Part: ML/DL',classfi:'Class: Delta'),
+
+          ]),)],
+
+
+        ),
+        bottomNavigationBar: BottomAppBar(
+            child: Container(
+              child: Text('\n"A man needs to be strong." - Alpha male',style:
+              TextStyle(fontSize: 20,color: Colors.white,fontFamily: "FrankRuhlLibre-VariableFont_wght"),textAlign: TextAlign.center),
+            ))
+    );
+  }
+}
+
+class ShowDeveloper extends StatelessWidget {
+  const ShowDeveloper({Key? key, this.DvevloperImage,this.giho,this.rule,this.classfi}) : super(key: key);
+  final DvevloperImage;
+  final giho;
+  final rule;
+  final classfi;
+  @override
+  Widget build(BuildContext context) {
+    return Container(height:320,width: 350,padding: EdgeInsets.all(2),
+        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(10)),boxShadow:[ BoxShadow(color: Colors.grey,spreadRadius: 3,blurRadius: 7,offset: Offset(2,1))]),
+        child:Column(children:[
+          Container(height: 250,width: 350,
+            child:ClipRRect(borderRadius:BorderRadius.circular(8),child: Image.asset(DvevloperImage,fit: BoxFit.fill,)),),
+          SizedBox(height: 10),
+          Row(children: [
+            SizedBox(width: 23,),
+            Container(alignment: Alignment.center,height:40,width: 40,decoration:BoxDecoration(color: Colors.transparent,borderRadius: BorderRadius.circular(20)),
+                child: Text('$giho',style: TextStyle(fontSize: 34))),
+            SizedBox(width: 15,),
+            Container(height:55,width: 200,
+                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  children:[
+                    Container(height: 20,width:200,color: Colors.transparent,child: Text('$classfi',style: TextStyle(fontSize: 18),),),
+                    SizedBox(height: 5,),
+                    Container(height: 20,width:200,color: Colors.transparent,child: Text('$rule',style: TextStyle(fontSize: 18)),),
+                  ],)),]),],));
+  }
 }
 
 
-class _MyAppState extends State<MyApp> {
 
-  // mbti 선택 시작
+
+
+class SelectPage extends StatefulWidget {
+  const SelectPage({Key? key,this.UserImagePath}) : super(key: key);
+  final UserImagePath;
+
+  @override
+  State<SelectPage> createState() => _SelectPageState();
+}
+class _SelectPageState extends State<SelectPage> {
+
   final MBTI = ["MBTI",'ISTJ','ISTP','INFJ','INTJ','ISFJ','ISFP','INFP','INTP','ESTJ','ESFP','ENFP','ENTP','ESFJ','ESTP','ENFJ','ENTJ'];
   var selectedMBTI = '';
+
+  var selectedDate;
+
+
   @override
   void initState() {
     super.initState();
     setState(() {
-      selectedMBTI = MBTI[0];
-      // _selectedAge = _Age[0];
+      selectedMBTI=MBTI[0];
     });
   }
 
-  // mbti 선택 마지막
-  //날짜 선택
-  var selectedDate;
-  void _showDatePicker(){
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    ).then((value) {
-      String getToday(){
-        DateTime now = DateTime.now();
-        DateFormat formatter = DateFormat('yyyy.MM.dd');
-        var strToday = formatter.format(value!);
-        return strToday;
-      }
-      selectedDate = getToday();
-    });
-  }
+  var testurl = 'http://15.164.236.146/api/RegisterUserImg?Model_rst=0';
+  var resultData;
 
-  var UserImagePath;
-  List<String> userImagePaths =[];
+  Future PostData() async {
+    List<int> imageBytes = widget.UserImagePath.readAsBytesSync();
+    String base64Image = base64Encode(imageBytes);
+    Uri url = Uri.parse("http://15.164.236.146/api/RegisterUserImg?Model_rst=0");
+    http.Response response = await http.post(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; sharset=UTF-8',
+        }, //this. header is essential to send json data
+        body: jsonEncode(
+            {
+              "first_user": {
+                "user_img":base64Image,
+                "age": selectedDate,
+                "mbti": selectedMBTI
+              },
+              "result": {
+                "human": "False",
+                "male_type": "null",
+                "dsc": "null",
+                "img1": "null",
+                "img2": "null",
+                "img3": "null",
+                "img4": "null"
+              }
+            }
+        )
 
+    );
 
-  var resultImage;
-
-  getDate()async{
-    var url2 =await http.get(Uri.parse('https://codingapple1.github.io/app/data.json'));
-    var data =await jsonDecode(url2.body);
-
+    var returnbody = utf8.decode(response.bodyBytes);
+    var data = jsonDecode(returnbody);
     setState(() {
-      resultImage = data;
+      resultData = data;
     });
-    print(resultImage);
+    if(resultData['human'] == 'True'){
+      Navigator.push(context, MaterialPageRoute(builder: (c){
+        return ResultPage(resultData:resultData,UserImagePath: widget.UserImagePath,);
+      }));
+
+    } else
+      showDialog(context: context, builder: (context){
+        return Dialog(alignment: Alignment.center,backgroundColor: Colors.transparent,
+            child: Container(height: 500,
+              child: Column(mainAxisAlignment:MainAxisAlignment.center,
+                children: [
+                  Container(width: double.infinity,height: 300,color: Colors.red,child: Image.asset('assets/testm.png',fit: BoxFit.fill,)),
+                  Container(width: 500,height: 100,child: Text( '위와 같은 구도로 사진을 선택해 주세요',style: TextStyle(color: Colors.white,fontSize: 30),textAlign: TextAlign.center),),
+                  Container(width: 500,height: 100,child: Text( '위와 같은 구도로 사진을 선택해 주세요',style: TextStyle(color: Colors.white,fontSize: 30),textAlign: TextAlign.center),),
+                  TextButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, child: Text("확인",style: TextStyle(fontSize: 30,color: Colors.white))),
+                ],
+              ),
+            ));
+      });
+
+    // print(resultData);
+    // return utf8.decode(response.bodyBytes);
+    print(response.body);
   }
 
-
-
-
-  final urlImages= [
-    'https://t1.daumcdn.net/news/202210/04/kukinews/20221004152604048swko.jpg',
-    'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/15/mydaily/20230115054859216prji.jpg',
-
-  ];
-
-
-
+  // http://backendforecs-391845170.ap-northeast-2.elb.amazonaws.com/api/create/first_post/user_tbl?Model_1_rst=1&Model_3_rst=1
 
   nowTime(){
     DateTime now = DateTime.now();
@@ -104,319 +247,177 @@ class _MyAppState extends State<MyApp> {
     return strToday;
   }
 
-
-
-
-
-  Future PostImage() async {
-
-    List<int> imageBytes = UserImagePath.readAsBytesSync();
-    String base64Image = base64Encode(imageBytes);
-
-
-    Uri url = Uri.parse('https://jsonplaceholder.typicode.com/albums');
-    http.Response response = await http.post(url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; sharset=UTF-8',
-        }, //this. header is essential to send json data
-        body: jsonEncode([
-          {'user_img_url':base64Image,
-            'cft_result':'',
-            'age':selectedDate,
-            'mbti':selectedMBTI,
-            'created_at':nowTime(),
-            'created_by':'Han'}
-        ])
-    );
-    print(imageBytes);
-    print(response.body);
-    print(response.statusCode);
-    // print(response.body);
-  }
-
-
-  // 'http://10.0.0.103:5000/profile/upload-mutiple'
-  // 'https://jsonplaceholder.typicode.com/posts'
-  // 'https://jsonplaceholder.typicode.com/albums'
-
-
-  Future uploadPhotos() async {
-    Uri uri = Uri.parse('https://jsonplaceholder.typicode.com/posts');
-    http.MultipartRequest request = http.MultipartRequest('POST', uri);
-    if(UserImagePath != null){
-
-      request.fields['mbti'] = selectedMBTI;
-      request.fields['age'] = selectedDate;
-
-      // request.files.add(await http.MultipartFile.fromPath('image', UserImagePath.path));
-
-    }
-
-    http.StreamedResponse response = await request.send();
-    var responseBytes = await response.stream.toBytes();
-    var responseString = utf8.decode(responseBytes);
-
-    print(response.statusCode);
-
-    print(responseString);
-
-    return responseString;
-  }
-
-
-
-
-
-
-
-
-
-
-  Future test()async {
-    http.MultipartRequest request = await http.MultipartRequest('POST', Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-    request.fields['mbti'] = selectedMBTI;
-
-
-    request.files.add(await http.MultipartFile.fromPath('파일 이름', UserImagePath.path));
-    var respone = await request.send();
-    print(respone.statusCode);
-    print(respone);
-
-
-
-  }
-
-
-
-
-
-
-
-
-
-
-//여기부터 메인 홈페이지 시작
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:const Text('alpha finder'),
-          actions:[
-            IconButton(onPressed: ()async{
+        appBar: AppBar(
 
-              var picker = ImagePicker();
-              final XFile? image = await picker.pickImage(source: ImageSource.camera);
-              //TO convert Xfile into file
+            actions: [
+              TextButton(onPressed: ()async{
 
-              File file = File(image!.path);
-              UserImagePath = file;
-              print(UserImagePath);
-
-
-
-
-            }, icon:const Icon(Icons.camera_alt_outlined)),
-
-            IconButton(onPressed: ()async{
-              var picker = ImagePicker();
-              var image = await picker.pickImage(source: ImageSource.gallery);
-              if (image != null){
-                UserImagePath = File(image.path);
-                userImagePaths.add(UserImagePath.path);
-                print(UserImagePath);
-              }
-            }, icon:const Icon(Icons.photo_album_outlined))]),
+                if((selectedMBTI != null)&(selectedDate != null)&(selectedMBTI != MBTI[0])&(widget.UserImagePath != null))
+                {
+                  await PostData();
+                } else
+                  showDialog(context: context, builder: (context){
+                    return Dialog(backgroundColor: Colors.transparent,child: Container(height: 150,width: 300,child: Column(
+                      children: [
+                        Text('MBTI와 Brith를\n입력해 주세요',style: TextStyle(color: Colors.white,fontSize: 30,fontFamily:"Roboto-Regular"),textAlign: TextAlign.center),
+                        TextButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, child: Text('확인',style: TextStyle(color: Colors.white,fontSize: 30),))
+                      ],
+                    )),);
+                  });
 
 
+              }, child: Text('분석',style: TextStyle(color: Colors.white,fontSize: 20),))]),
+        body: Center(child: Column(children: [
+          Expanded(flex:1,child:Container(
+            padding: EdgeInsets.all(2),
+            decoration: BoxDecoration(color: Colors.transparent,borderRadius: BorderRadius.all(Radius.circular(10)),boxShadow: [BoxShadow(color: Colors.grey,spreadRadius: 3,blurRadius: 7,offset: Offset(2,1))]),
+            height: 300,width: double.infinity,child:ClipRRect(borderRadius: BorderRadius.circular(8),child: Image.file(widget.UserImagePath,fit: BoxFit.fill)) ,),),
+          Expanded(flex:1,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children:[
+                  Container(width: 350,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.grey[400]
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 17,right: 0),
+                      child: DropdownButton(
+
+                          style: TextStyle(fontSize: 25 ,color: Colors.black),
+                          value: selectedMBTI,
+                          isExpanded: true,
+                          items: MBTI.map((value){
+                            return DropdownMenuItem(
+                                value: value,
+                                child: Text(value,style: TextStyle(fontFamily: "Roboto-Regular"),textAlign: TextAlign.center,));
+                          }).toList(), onChanged: (value){setState(() {
+                        selectedMBTI=value!;});}),
+                    ),
+                  ),
+
+                  Container(width: 350,height:50,decoration:
+                  BoxDecoration(),
+                      child: ElevatedButton(style: ElevatedButton.styleFrom(primary: Colors.grey[400]),onPressed: (){
+                        showDatePicker(context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime.now(),
+                            builder: (BuildContext context, Widget? child){
+                              return Theme(
+                                  data:ThemeData.dark(),
+                                  child: child!);
+                            }
+                        ).then((value){
+                          String getToday(){
+                            DateTime now = DateTime.now();
+                            DateFormat formatter = DateFormat('yyyy-MM-dd');
+                            var strToday = formatter.format(value!);
+                            return strToday;
+                          }
+                          selectedDate = getToday();
+                        });
+
+                      }, child:Align(alignment: Alignment.centerLeft,child: Text('Brith',textAlign: TextAlign.center,style: TextStyle(fontSize: 25,color: Colors.black,fontFamily: "Roboto-Regular")),))),
+
+                  Container(width: 350,height:50 ,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)),color: Colors.grey[300]),
+
+                    child: TextField(decoration: InputDecoration(filled:true,fillColor: Colors.grey[300],labelText: '당신의 연봉 단위 만원'),),
+                  ),
+
+                ]),),
+
+        ],)),
 
 
-
-      body: Container(
-        color:Colors.black38,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-            SizedBox(height:30),
-            CarouselSlider( //메인 개발자 결과 슬라이드로 보여주기
-              options: CarouselOptions(height: 400.0),
-              items: urlImages.map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(color: Colors.blue
-                      ),
-                      child: Image.network(i),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-
-
-            // 어플 예시 사진
-
-
-
-            SizedBox(height: 50),
-            //날짜 버튼
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children:[
-                Container(color: Colors.deepPurple.shade50,height: 75,width: 150,
-                    child:MaterialButton(onPressed:_showDatePicker,
-                        child:Padding(padding: EdgeInsets.all(0.0),
-                            child: Text("Your Age",style:TextStyle(color:Colors.black,fontSize: 25))))),
-                //mbti 버튼
-                Container(color: Colors.green,width: 150,
-                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                        children:[
-                          Text("Your MBTI",style:TextStyle(color: Colors.black,fontSize: 25)),
-                          DropdownButton(style:TextStyle(fontSize: 25,color: Colors.black,),
-                              value: selectedMBTI, items: MBTI.map((value)
-                              {return DropdownMenuItem(
-                                  value:value,
-                                  child: Text(value));
-                              }).toList(),onChanged: (value){setState(() {selectedMBTI = value!;});})])),
-              ],
-            ),
-
-            SizedBox(height: 50),
-
-
-            Container(
-              color: Colors.brown,width: 170,
-              child:Column(
-                children: [
-
-
-                  MaterialButton(onPressed:()async{
-
-
-                    if((selectedMBTI!=null) & (selectedDate != null) & (selectedMBTI != MBTI[0]) &(UserImagePath != null) ){
-
-
-                      // await PostImage();
-
-
-                      // var request = new http.MultipartRequest('POST', Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-                      // request.fields['age'] = '$selectedDate';
-                      // request.fields['mbti'] = '$selectedMBTI';
-                      //
-                      // request.files.add(await http.MultipartFile.fromPath('userImage.png',UserImagePath));
-                      //
-                      //
-                      //
-                      //
-                      // var res = await request.send();
-                      // print(res.statusCode);
-
-
-
-
-
-                      // final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
-                      // //요청에 이미지 파일 추가
-                      // final response = await http.post(url,
-                      //     headers: <String, String>{
-                      //   'Content-Type':'application/json; charset=UTF-8',
-                      //     },
-                      //     body: jsonEncode({"userImage":'$UserImagePath',"mbti":'$selectedMBTI','age':'$selectedDate'}));
-                      // print('Response status: ${response.statusCode}');
-                      // print('Response body: ${response.body}');
-
-
-                      await getDate();
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder:(c){
-                            return ResultPage(resultImage:resultImage);}));
-
-
-                    }else //입력 안한경우 팝업창
-                      showDialog(context: context, builder: (context){
-                        return Dialog(child:Text('반드시 당신의 MBTI,생년월일,사진을 선택해주세요',textAlign:TextAlign.center,style: TextStyle(fontSize: 30),));
-                      });
-                  },
-
-
-                      child:Padding(padding: EdgeInsets.all(20.0),
-                        child: Text("시작하기",style: TextStyle(fontSize: 25)),)),
-                ],
-              ),
-            ),
-            Container(child: TextButton(onPressed: ()async{
-              // test();
-              // uploadPhotos();
-              // print(UserImagePath.path);
-
-              PostImage();
-
-              // String imgpath = UserImagePath.path;
-              // File imgfile = File(imgpath);
-              // Uint8List imgbytes = await UserImagePath.readAsBytesSync();
-              // String bs4str = base64.encode(imgbytes);
-              // print(bs4str);
-
-
-            },child: Text('check'),
-
-            ),),],),
-
-      ),);}}
-
-
-
-
-
-class ResultPage extends StatelessWidget {
-  ResultPage({Key? key, this.resultImage}) : super(key: key);
-  final resultImage;
-  final controller = ScreenshotController();
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Screenshot(
-      controller: controller,
-      child: Scaffold(
-          appBar: AppBar(),
-          body: Container(color: Colors.yellow,
-            height: double.infinity,
-            width: double.infinity,
-            child: Column(children: [
-              SizedBox(height: 40,),
-              Container(color: Colors.cyanAccent, width: 300, height: 300,
-
-                  child: Image.network(resultImage[0]['image'])),
-
-              SizedBox(height: 40,),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(width: 100, height: 100, color: Colors.deepPurple,),
-                  Container(width: 100, height: 100, color: Colors.deepPurple,),
-                ],),
-              SizedBox(height: 40,),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(width: 100, height: 100, color: Colors.deepPurple,),
-                  Container(width: 100, height: 100, color: Colors.deepPurple,),
-                ],),
-              SizedBox(height: 25,),
-              Container(height: 100, width: 100, color: Colors.cyan,
-                child: IconButton(onPressed: () async {
-                  final screenImage = await controller.capture();
-                  saveAndShare(screenImage!);
-                }, icon: Icon(Icons.share_outlined)),)
-            ]),)
-      ),
+        bottomNavigationBar: BottomAppBar(
+            child: Container(
+              child: Text('\n"A man needs to be strong." - Alpha Male',style:
+              TextStyle(fontSize: 20,color: Colors.white,fontFamily: "FrankRuhlLibre-VariableFont_wght"),textAlign: TextAlign.center),
+            )
+        )
     );
   }
+}
 
-  Future saveAndShare(Uint8List bytes) async {
+class ResultPage extends StatelessWidget {
+  ResultPage({Key? key,this.resultData,this.UserImagePath}) : super(key: key);
+  final UserImagePath;
+  final resultData;
+  final screencontrolloer = ScreenshotController();
+
+
+
+  Future saveAndShare(Uint8List bytes) async{
     final dicectory = await getApplicationDocumentsDirectory();
     final screenImage = File('${dicectory.path}/flutter.png');
     screenImage.writeAsBytesSync(bytes);
     await Share.shareFiles([screenImage.path]);
   }
+
+  Future SaveAlbum(Uint8List bytes)async{
+    final dicectory = await getApplicationDocumentsDirectory();
+    final screenImage = File('${dicectory.path}/flutter.png');
+    screenImage.writeAsBytesSync(bytes);
+    var SaveAlbumPath = screenImage.path;
+
+    GallerySaver.saveImage(SaveAlbumPath);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Screenshot(
+      controller: screencontrolloer,
+      child: Scaffold(
+
+          appBar: AppBar(leading: IconButton(onPressed: (){
+            Navigator.of(context).popUntil((route) => route.isFirst);
+
+          }, icon: Icon(Icons.home)),
+              actions: [
+
+                TextButton(onPressed: ()async{
+                  final screenImage = await screencontrolloer.capture();
+                  SaveAlbum(screenImage!);
+                }, child: Text('저장',style: TextStyle(color:Colors.white,fontSize: 20),)),
+
+                TextButton(onPressed: ()async{
+                  final screenImage = await screencontrolloer.capture();
+                  saveAndShare(screenImage!);
+                }, child: Text('공유',style: TextStyle(color:Colors.white,fontSize: 20),)),
+
+                // TextButton(onPressed: (){}, child: Text('체크',style: TextStyle(color:Colors.white,fontSize: 20),)),
+              ]),
+          body: ListView(
+            children: [
+              Center(child: Column(children: [
+
+                Container(decoration: BoxDecoration(border: Border.all(color: Colors.white,width: 2),borderRadius: BorderRadius.circular(10)),alignment: Alignment.center,width: 300,height: 100,child: Text(resultData['male_type'],style: TextStyle(fontSize: 50,color: Colors.white),)),
+                SizedBox(height: 10,),
+                Container(decoration: BoxDecoration(border: Border.all(color: Colors.white,width: 2),borderRadius: BorderRadius.circular(10)),alignment: Alignment.center,width: 400,height: 150,child: Text(resultData['dsc'],style: TextStyle(fontSize: 20,color: Colors.white),textAlign: TextAlign.center,)),
+                SizedBox(height: 10,),
+                Container(width:double.infinity,height: 270,color: Colors.transparent,child:ClipRRect(borderRadius: BorderRadius.all(Radius.circular(20)),child: Image.file(UserImagePath,fit: BoxFit.fill))),
+                SizedBox(height: 10,),
+
+                Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+
+                  Container(height: 200,width: 200,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.memory(base64Decode(resultData['img1']),fit: BoxFit.fill,)),),
+                  Container(height: 200,width: 200,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.memory(base64Decode(resultData['img2']),fit: BoxFit.fill,)),),
+                ]),
+                SizedBox(height: 10,),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+                  Container(height: 200,width: 200,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.memory(base64Decode(resultData['img3']),fit: BoxFit.fill,)),),
+                  Container(height: 200,width: 200,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.memory(base64Decode(resultData['img4']),fit: BoxFit.fill,)),),
+                ]),
+              ]),)
+            ],
+          )
+      ),
+    );
+  }
 }
-
-
