@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -11,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 void main() async{
@@ -98,10 +97,10 @@ class MyApp extends StatefulWidget {
 
             ShowDeveloper(DvevloperImage:'assets/sang.jpg',giho:'γ',rule:'Team-Alpha: Back-End',classfi:'Gamma'),
 
-            Divider(color: Colors.grey.shade700,height: 5),
+
             ShowDeveloper(DvevloperImage:'assets/han.jpg',giho:'γ',rule: 'Team-Alpha: Front-End',classfi:'Gamma'),
 
-            Divider(color: Colors.grey.shade700,height: 5),
+
             ShowDeveloper(DvevloperImage:'assets/won.jpg',giho:'δ',rule: 'Team-Alpha: ML/DL',classfi:'Delta'),
 
           ]),)],
@@ -133,8 +132,13 @@ class ShowDeveloper extends StatelessWidget {
           SizedBox(height: 10),
           Row(children: [
             SizedBox(width: 23,),
-            Container(alignment: Alignment.center,height:40,width: 40,decoration:BoxDecoration(color: Colors.transparent,borderRadius: BorderRadius.circular(20)),
-                child: Text('$giho',style: TextStyle(fontSize: 34,color: Colors.white))),
+            Column(
+              children: [
+                Container(alignment: Alignment.center,height:40,width: 40,decoration:BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    child: Text('$giho  ',style: TextStyle(fontSize: 34,color: Colors.white))),
+                SizedBox(height: 7,)
+              ],
+            ),
             SizedBox(width: 15,),
             Container(height:55,width: 200,
                 child: Column(mainAxisAlignment: MainAxisAlignment.center,
@@ -145,9 +149,6 @@ class ShowDeveloper extends StatelessWidget {
                   ],)),]),],));
   }
 }
-
-
-
 
 
 class SelectPage extends StatefulWidget {
@@ -173,13 +174,43 @@ class _SelectPageState extends State<SelectPage> {
     });
   }
 
-  var testurl = 'http://15.164.236.146/api/RegisterUserImg?Model_rst=0';
+
+  var testUrl = 'http://3.38.147.45:8000/api/RegisterUserImg_sample?Model_rst=5';
+  var serverUrl = "http://3.38.147.45:8000/api/RegisterResult";
   var resultData;
   var dscsplit;
-  Future PostData() async {
+
+
+  Future PostData([bool mounted = true]) async {
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+        barrierDismissible: true,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.transparent,
+            child: Container(width: 100,height: 300,
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  // The loading indicator
+                  SpinKitHourGlass(color: Colors.white,duration: Duration(seconds: 2),size: 100),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  // Some text
+                  Text('분석중...',style: TextStyle(color: Colors.white,fontSize: 20),)
+                ],
+              ),
+            ),
+          );
+        });
+
+
+
     List<int> imageBytes = widget.UserImagePath.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
-    Uri url = Uri.parse("http://15.164.236.146/api/RegisterUserImg?Model_rst=1");
+    Uri url = Uri.parse(testUrl);
     http.Response response = await http.post(url,
         headers: <String, String>{
           'Content-Type': 'application/json; sharset=UTF-8',
@@ -200,8 +231,11 @@ class _SelectPageState extends State<SelectPage> {
                 "img3": "null",
                 "img4": "null"
               }
+
             }
+
         )
+
 
     );
 
@@ -211,6 +245,10 @@ class _SelectPageState extends State<SelectPage> {
       resultData = data;
       dscsplit = resultData['dsc'];
     });
+
+    if (!mounted) return;
+    Navigator.of(context).pop();
+
     if(resultData['human'] == 'True'){
       Navigator.push(context, MaterialPageRoute(builder: (c){
         return ResultPage(resultData:resultData,UserImagePath: widget.UserImagePath,);
@@ -221,28 +259,30 @@ class _SelectPageState extends State<SelectPage> {
         return Dialog(alignment: Alignment.center,backgroundColor: Colors.transparent,
             child: Container(height: 380,
               child: Column(mainAxisAlignment:MainAxisAlignment.center,
-            children: [
-              Container(
-                  child: MaterialButton(minWidth: 600,onPressed: () { Navigator.pop(context); },
-                      child: Image.asset('assets/testm.png',fit: BoxFit.fill,))),
+                children: [
+                  Container(
+                      child: MaterialButton(minWidth: 600,onPressed: () { Navigator.pop(context); },
+                          child: Image.asset('assets/testm.png',fit: BoxFit.fill,))),
 
-              SizedBox(height: 17,),
-              Container(alignment: Alignment.center,width: 500,height: 30,child: Text( '위와 같은 구도로 사진을 선택해 주세요',style: TextStyle(color: Colors.white,fontSize: 20),textAlign: TextAlign.center),),
+                  SizedBox(height: 17,),
+                  Container(alignment: Alignment.center,width: 500,height: 30,child: Text( '위와 같은 구도로 사진을 선택해 주세요',style: TextStyle(color: Colors.white,fontSize: 20),textAlign: TextAlign.center),),
 
-              // TextButton(onPressed: (){
-              //   Navigator.pop(context);
-              // }, child: Text("확인",style: TextStyle(fontSize: 24,color: Colors.white))),
-            ],
-            ),
-          ));
+                  // TextButton(onPressed: (){
+                  //   Navigator.pop(context);
+                  // }, child: Text("확인",style: TextStyle(fontSize: 24,color: Colors.white))),
+                ],
+              ),
+            ));
       });
+
 
     // print(resultData);
     // return utf8.decode(response.bodyBytes);
+    print(response.statusCode);
     print(response.body);
   }
 
-  // http://backendforecs-391845170.ap-northeast-2.elb.amazonaws.com/api/create/first_post/user_tbl?Model_1_rst=1&Model_3_rst=1
+
 
   nowTime(){
     DateTime now = DateTime.now();
@@ -262,6 +302,7 @@ class _SelectPageState extends State<SelectPage> {
 
                 if((selectedMBTI != null)&(selectedDate != null)&(selectedMBTI != MBTI[0])&(widget.UserImagePath != null))
                 {
+
                   await PostData();
                 } else
                   showDialog(context: context, builder: (context){
@@ -290,7 +331,7 @@ class _SelectPageState extends State<SelectPage> {
                   SizedBox(height: 1,),
                   Container(width: 350,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(5),
                         color: Colors.grey[400]
                     ),
                     child: Padding(
@@ -317,25 +358,25 @@ class _SelectPageState extends State<SelectPage> {
                             firstDate: DateTime(1900),
                             lastDate: DateTime.now(),
                             builder: (BuildContext context, Widget? child){
-                          return Theme(
-                              data:ThemeData.dark(),
-                              child: child!);
-                      }
-                    ).then((value){
-                      String getToday(){
-                        DateTime now = DateTime.now();
-                        DateFormat formatter = DateFormat('yyyy-MM-dd');
-                        var strToday = formatter.format(value!);
-                        return strToday;
-                      }
-                      selectedDate = getToday();
-                    });
+                              return Theme(
+                                  data:ThemeData.dark(),
+                                  child: child!);
+                            }
+                        ).then((value){
+                          String getToday(){
+                            DateTime now = DateTime.now();
+                            DateFormat formatter = DateFormat('yyyy-MM-dd');
+                            var strToday = formatter.format(value!);
+                            return strToday;
+                          }
+                          selectedDate = getToday();
+                        });
 
-                  }, child:Align(alignment: Alignment.centerLeft,child: Text('Brith',textAlign: TextAlign.center,style: TextStyle(fontSize: 25,color: Colors.black,fontFamily: "Roboto-Regular")),))),
+                      }, child:Align(alignment: Alignment.centerLeft,child: Text('Brith',textAlign: TextAlign.center,style: TextStyle(fontSize: 25,color: Colors.black,fontFamily: "Roboto-Regular")),))),
 
                   Container(width: 350,height:50 ,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)),color: Colors.grey[300]),
 
-                        child: TextField(decoration: InputDecoration(filled:true,fillColor: Colors.grey[300],labelText: '당신의 연봉 단위 만원'),),
+                    child: TextField(decoration: InputDecoration(filled:true,fillColor: Colors.grey[300],labelText: '당신의 연봉 단위 만원'),),
                   ),
 
                 ]),),
@@ -376,9 +417,7 @@ class ResultPage extends StatelessWidget {
   }
 
 
-
-
-var teststring = "·dkafafjei · akdfjoewq · aslkfjqpo · dfkajfo ";
+  var teststring = "·dkafafjei · akdfjoewq · aslkfjqpo · dfkajfo ";
 
 
 
@@ -391,9 +430,9 @@ var teststring = "·dkafafjei · akdfjoewq · aslkfjqpo · dfkajfo ";
           appBar: AppBar(shadowColor: Colors.grey,
               elevation: 0.5,
               leading: IconButton(onPressed: (){
-            Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.of(context).popUntil((route) => route.isFirst);
 
-          }, icon: Icon(Icons.home)),
+              }, icon: Icon(Icons.home)),
               actions: [
 
                 TextButton(onPressed: ()async{
@@ -405,31 +444,30 @@ var teststring = "·dkafafjei · akdfjoewq · aslkfjqpo · dfkajfo ";
                   final screenImage = await screencontrolloer.capture();
                   saveAndShare(screenImage!);
                 }, child: Text('공유',style: TextStyle(color:Colors.white,fontSize: 20),)),
-
-                TextButton(onPressed: ()async{
-
-
-                }, child: Text('체크',style: TextStyle(color:Colors.white,fontSize: 20),)),
-
                 // TextButton(onPressed: (){}, child: Text('체크',style: TextStyle(color:Colors.white,fontSize: 20),)),
+
               ]),
           body: ListView(
             children: [
-              Center(child: Column(children: [
-                Divider(color: Colors.grey.shade900,height: 5),
-                Container(width:double.infinity,height: 400,color: Colors.transparent,child:ClipRRect(child: Image.file(UserImagePath,fit: BoxFit.fill))),
-                SizedBox(height: 20,),
-                Container(color: Colors.transparent,alignment: Alignment.center,width: 300,height: 80,child: Text(resultData['male_type'],style: TextStyle(fontSize: 70,color: Colors.white),)),
-                SizedBox(height: 20,),
-                Container(color: Colors.transparent,alignment: Alignment.topCenter,width: 400,height: 360,child: Column(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(("·" + resultData['dsc'].split('·')[1]) ,style: TextStyle(fontSize: 24,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
-                    SizedBox(height: 15),
-                    Text(("·" + resultData['dsc'].split('·')[2]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
-                    SizedBox(height: 15),
-                    Text(("·" + resultData['dsc'].split('·')[3]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
-                  ],
-                )),
+              Container(color: Colors.transparent,
+                child:
+                Column(
+                    children:[
+                      Divider(color: Colors.grey.shade900,height: 5),
+                      Container(width:double.infinity,height: 400,color: Colors.transparent,child:ClipRRect(child: Image.file(UserImagePath,fit: BoxFit.fill))),
+                      SizedBox(height: 20,),
+                      Container(color: Colors.transparent,alignment: Alignment.topCenter,width: 300,height: 100,child: Text(resultData['male_type'],style: TextStyle(fontSize: 70,color: Colors.white,fontFamily:"Amiri-Regular" ),)),
+                      SizedBox(height: 15,),
+                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text((" ·" + resultData['dsc'].split('·')[1]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
+                          SizedBox(height: 15),
+                          Text((" ·" + resultData['dsc'].split('·')[2]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
+                          SizedBox(height: 15),
+                          Text((" ·" + resultData['dsc'].split('·')[3]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
+                          SizedBox(height: 10,),
+                        ],
+                ),
 
                 Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
                   Container(height: 200,width: 200,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.memory(base64Decode(resultData['img1']),fit: BoxFit.fill,)),),
@@ -441,7 +479,7 @@ var teststring = "·dkafafjei · akdfjoewq · aslkfjqpo · dfkajfo ";
                   Container(height: 200,width: 200,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.memory(base64Decode(resultData['img3']),fit: BoxFit.fill,)),),
                   Container(height: 200,width: 200,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.memory(base64Decode(resultData['img4']),fit: BoxFit.fill,)),),
                 ]),
-                ]
+              ]
               ),
               )
             ],

@@ -1,56 +1,33 @@
-# 작업일지
+# Alpha-male-Project
 
-### 23-02-06 
-메인,업로드,결과뷰 프로트타입 완료 내일 공유 버튼 시도
-
-### 23-02-07 
-공유버튼은 성공한거 같은데 스크린샷 찍은것이 공유버튼으로 안넘어감...
-
-### 23-02-08 
-결과창 스크린샷 후 공유버튼 까지 구현 완료 이제 서버에 넘겨주는 작업시작
-
-### 23-02-09
-서버에서 get해서 정보 받는거 확인 반면 post는 감이 잘 안잡힘 
-
-### 23-02-10
-서버에서 받아온 사진을 출력해야 하는곳에 넣는것 시도중
-
-### 23-02-13
-메인페이지 디자인 시도중...막막함, Figma로 사용하는 법 
+## 프로젝트 기획이유
 
 
-### 23-02-14
 
-Appbar 왼쪽 상단 이름, 오른쪽 상단 카메라 아이콘 기능, 앨범 아이콘 기능을 전부 입력 해야한다 그러지 않고 시작하기 버튼을 누를시 알람 모달창이 뜬다. 
-모든 정보와 이미지 선택을 한후 시작하기를 누른다면 결과창넘어가면서
-서버로 입력한 정보를 http통신을 통해 서버로 전송함, 아래 두 테스트 버튼은 지울껏!!
-전체적으로 필요 없는 코드 다수 반드시 확인후 수정!!
-어플 디자인하기, 앱 켰을때 로딩화면 만들기
+## 사용 방법     - KR
+1.어플을 설치 후 실행시킨다.
+2.오른쪽 상단 Appbar에 있는 카메라,앨범 아이콘 버튼을 눌러 상체 위로 나오는 촬영 및 사진 선택을 한다.
+3.촬영 및 사진선택후 선택페이지에서 MBTI,Birth,연봉을 입력 후 분석버튼을 누른다.
+4.잠시 기다린다음 결과페이지에서 본인의 분류된 정보를 확인한다.
+5.본인 정보를 확인하였으면 오른쪽 상단 스크린샷,공유 버튼을 눌러 앨범으로 저장 또는 SNS로 공유를 한다.
+6.다른 사진으로 다시 도전하고 싶다면 왼쪽 상단 집 모양 아이콘버튼을 누른후 2번으로 돌아가 다시 시도한다.
 
+## How to Use? - EN
+1.First installing the app, launch it.
+2.Take a photo by pressing the camera or album icon button on the top right app bar, or select a photo that shows your torso.
+3.After photo and selection, enter MBTI, Birth, and annual salary on the selection page and press the analysis button.
+4.Wait for a while and check the classified information on the results page.
+5.If you have confirmed your information, click the screenshot and share button at the top right to save it as an album or share it on social media.
+6.If you want to try again with a different photo, Onpress the Home button in the upper left corner and go back to step 2 and try again.
 
-페이지 구성 갈아 엎음,두개의 페이지로 구성 첫번째 페이지 개발자들 결과 예시창 아래 두개의 age,mbti 입력 버튼,
+## 사용한 패키지(What package Pub?)
 
-### 23-02-15 
-필요 없는 코드 삭제,시작하기 버튼을 누를시 서버로 post 작업과 사진 결과값 데이터를 기다리는 로딩 도는거 만들기,
-이미지 경로 말고 변환으로 전달,appbar크기와 글꼴,아이콘 크기 변환,
-base64encode로 파일 변환? 다른 test url로도 201 확인
-base64decode로 사진 출력까지 확인
-
-### 23-02-16
-궁금점: image picker를 통해서 사진을 찍든 앨범으로 선택을 하든 임시 저장소에 있는 데이터를 base64를 통해서 encode를 하는건데
-이게 파일 경로라는 문자를 encode해버리면 사진이라는 데이터가 가는게 아니라 임시 저장소의 경로를 base64를 통해서 encode 데이터가 전달 되는게 아닌가? 라는 의문점
-궁금점 해결: base64 문자열이 콘솔창에 전부 안나온 상태여서 이미지로 변환이 안돼었던것임
-
-진행상황: 다시 전체 페이지 구성 갈아 엎음.
-
-어플 순서
-1.앱 실행시 로딩창 구현(X:이미지 정해지거나 글꼴 정해지면 바로 할 예정)
-2.main(cam,gall) 선택시  
-3.Age&MBTI 입력 버튼 페이지 전부다 입력후 전송시 post와 get 작업 이루어져야함
-4.결과창으로 갈때의 로딩 구현(x: 시도해 봤지만 구현이 잘 되지 않아 우선순위에서 밀림)
-5.결과창 view로 와서 ListView로 구현을 해서 결과 값만 볼 수 있게 한다. 
-
-### 23-02-21
-의논한 디자인 기능 1차 완료
-몇차례 검토 및 수정후 최종 완료
-로딩페이지 구현하기...!
+Name : image_picker            version : ^0.8.6+1
+Name : intl                    version : ^0.17.0
+Name : share_plus              version : ^6.3.0
+Name : screenshot              version : ^1.3.0
+Name : path_provider           version : ^2.0.2
+Name : carousel_slider         version : ^4.2.1
+Name : flutter_native_splash   version : ^2.2.17
+Name : gallery_saver           version : ^2.3.2
+Name : flutter_spinkit         version : ^5.1.0
