@@ -99,36 +99,36 @@
 
 **SangRok Jung** : <a href="https://github.com/sangrokjung" target="_blank">github</a> - sesilao@naver.com
 > * Lead
-    >   * Project Lead.
+>   * Project Lead.
 >   * Managing GitHub Repositories and Policies.
 >   * Notion, Upbase Management.
 >   * Manage schedules.
 >   * Planning and production of readme.
 > * Back-End
-    >   * Imaging DL Servers with Dockers
+>   * Imaging DL Servers with Dockers
 >   * Leverage FastAPI to create POST Protocols for the Client to send.
 >   * Create an API to call DL.
 >   * Create an API that stores data sent by the Client in DB.
 >   * Connect with DataBase.
 > * Cloud
-    >   * Building an EC2 Ubuntu environment for DL learning. (G4dn, P4)
+>   * Building an EC2 Ubuntu environment for DL learning. (G4dn, P4)
 >   * Deploying DL Server CICD with GitHub Actions and S3, EC2.
 >   * Deploying Back-End Server CICD with GitHub Actions and ECR, ECS, and ELB.
 >   * Deploying RDBMS PostgreSQL using RDS.
 > * DataBase.
-    >   *  Schema, table, and data CRUD utilizing PostgreSQL.
+>   *  Schema, table, and data CRUD utilizing PostgreSQL.
 >   *  ERD Production.
 > * Mobile
-    >   * Design with Mockup.
+>   * Design with Mockup.
 > * DL/ML
-    >   * Collection of data through crawling.
+>   * Collection of data through crawling.
 
 
 
 
 **Seungwon Lee** : <a href="https://github.com/diet-teacher" target="_blank">github</a> - lsw4556@daum.net
 > * DL/ML
-    >   * Collection of data through crawling.
+>   * Collection of data through crawling.
 >   * Analyse surveyed data and visualized it using matplotlib and pandas
 >   * Trained the first DL model to find out human face is exist using Pytorch
 >   * Trained the second DL model that for auto labeling using Pytorch
@@ -136,36 +136,36 @@
 
 **Jaehee Han** : <a href="https://github.com/82Hardy-J" target="_blank">github</a> - handjh6903@naver.com
 > * Team work
-    >   * Execute Leader's Command, Compliance with project rules.
+>   * Execute Leader's Command, Compliance with project rules.
 > * Mobile
-    >   * Camera function and album function were activated using Image Picker.
+>   * Camera function and album function were activated using Image Picker.
 >   * It makes a request to the server using HTTP and Post and responds with information.
 >   * Parse the data received as a response using HTTP and put
 >   * Give the user MainPage, SelectPage,Show the ResultPage.
 >   * Create the features required for each page.
 >   * Designed the app logo.
 > * DL/ML
-    >   * Collection of data through crawling.
+>   * Collection of data through crawling.
 
 
 ## User Stories
 > Epics
 > * 메인 (뷰)
-    >     * 카메라 버튼
+>     * 카메라 버튼
 >     * 갤러리 버튼
 > * 이미지 입력 (뷰)
-    >     * 카메라
-            >         * 카메라 촬영 버튼
+>     * 카메라
+>         * 카메라 촬영 버튼
 >     * 갤러리
-        >         * 갤러리 사진 선택
+>         * 갤러리 사진 선택
 > * 이미지 로드 (뷰)
-    >     * 카메라 촬영 결과 or 갤러리에서 선택 된 이미지
+>     * 카메라 촬영 결과 or 갤러리에서 선택 된 이미지
 >     * MBTI 인풋(메뉴 리스트)
 >     * 생년월일 인풋(calendar)
 >     * 분석 버튼 (비활성 : 회색, 활성 : 유색)
 >     * 뒤로 가기 버튼
 > * 결과(뷰)
-    >     * 홈 버튼
+>     * 홈 버튼
 >     * 공유하기 버튼
 >     * 이미지 저장 버튼
 >
@@ -173,56 +173,56 @@
 >
 > Stories
 > * 메인(뷰)
-    >     * 사용자 스토리
-            >         * 사용자는 알파메일의 메인뷰에 진입한다.
+>     * 사용자 스토리
+>         * 사용자는 알파메일의 메인뷰에 진입한다.
 >         * 사용자는 카메라 버튼을 클릭한다.
 >         * 사용자는 갤러리 버튼은 클릭한다.
 >     * 시스템 스토리
-        >         * 시스템(클라이언트)은 휴대폰 카메라에 연결한다.
+>         * 시스템(클라이언트)은 휴대폰 카메라에 연결한다.
 >         * 시스템(클라이언트)은 휴대폰 카메라에 연결한다.
 >         * 시스템(클라이언트)은 휴대폰 갤러리의 사진을 불러온다.
 > * 이미지 입력 (뷰)
-    >     * 사용자 스토리
-            >         * 카메라
-                        >             * 사용자는 카메라 촬영 버튼을 누른다.
+>     * 사용자 스토리
+>         * 카메라
+>             * 사용자는 카메라 촬영 버튼을 누른다.
 >             * 사용자는 뒤로 가기 버튼을 누른다.
-                >                 * 사용자는 메인 뷰로 돌아간다.
+>                 * 사용자는 메인 뷰로 돌아간다.
 >         * 갤러리
-            >             * 사용자는 사진을 선택한다.
+>             * 사용자는 사진을 선택한다.
 >             * 사용자는 뒤로 가기 버튼을 누른다.
-                >                 * 사용자는 메인 뷰로 돌아간다.
+>                 * 사용자는 메인 뷰로 돌아간다.
 >     * 시스템 스토리
-        >         * 시스템(클라이언트)은 사용자가 뒤로 가기 선택시 메인 뷰로 돌아간다.
+>         * 시스템(클라이언트)은 사용자가 뒤로 가기 선택시 메인 뷰로 돌아간다.
 > * 이미지 로드 (뷰)
-    >     * 사용자 스토리
-            >         * 사용자는 자신의 이미지를 확인한다.
+>     * 사용자 스토리
+>         * 사용자는 자신의 이미지를 확인한다.
 >         * 사용자는 MBTI와 생년월일을 입력하지 않고 분석 버튼을 누른다.
-            >             * 사용자는 알림창을 본다.
+>             * 사용자는 알림창을 본다.
 >             * 사용자는 알림창을 터치하고 다시 데이터를 입력한다.
 >         * 사용자는 MBTI를 입력한다.
 >         * 사용자는 생년월일을 입력한다.
 >         * 사용자는 분석 버튼을 누른다.
 >     * 시스템 스토리
-        >         * 시스템(클라이언트)은 사용자가 생년월일과 MBTI를 입력하지 않고 분석 버튼을 누를시 아무일도 발생시키지 않는다.
+>         * 시스템(클라이언트)은 사용자가 생년월일과 MBTI를 입력하지 않고 분석 버튼을 누를시 아무일도 발생시키지 않는다.
 >         * 시스템(클라이언트)은 사용자가 생년월일과 MBTI를 입력하고 분석 버튼을 누르면 사용자에게 로딩중 화면을 출력한다.
 >         * 시스템(클라이언트)은 사용자의 이미지를 base64 string type 변환하고 생년월일과 MBTI 데이터를 시스템(백엔드 서버)로 POST한다.
-            >             * 시스템(벡엔드 서버)는 DL_model1을 통해 이미지에 사람 얼굴이 존재하는지 validation 한다.
-                            >                 * 시스템(벡엔드 서버)는 얼굴이 존재하지 않으면 시스템(클라이언트)에 에러를 response한다.
-                                                >                     * 시스템(클라이언트)은 0을 response 받으면 “위와 같은 구도의 사진을 선택해 주세요.”라는 text와 사진 구도 예시 이미지를 출력한다.
+>             * 시스템(벡엔드 서버)는 DL_model1을 통해 이미지에 사람 얼굴이 존재하는지 validation 한다.
+>                 * 시스템(벡엔드 서버)는 얼굴이 존재하지 않으면 시스템(클라이언트)에 에러를 response한다.
+>                     * 시스템(클라이언트)은 0을 response 받으면 “위와 같은 구도의 사진을 선택해 주세요.”라는 text와 사진 구도 예시 이미지를 출력한다.
 >                 * 시스템(벡엔드 서버)는 얼굴이 존재하면  DL_model2를 통해 얼굴 유형을 분석하고 AWS S3 버킷에 이미지를 저장한다.
 >                 * 시스템(백엔드 서버)는 최종 결과값[“human”, “male_type”, “dsc”, “imgge(각 유형별 random 유명인 이미지)”]을 시스템(클라이언트)에 response한다.
 > * 결과(뷰)
-    >     * 사용자 스토리
-            >         * 사용자는 선택한 이미지에 대한 결과를 확인한다.
+>     * 사용자 스토리
+>         * 사용자는 선택한 이미지에 대한 결과를 확인한다.
 >         * 사용자는 결과에 대한 지표 상세 설명을 확인한다.
 >         * 사용자는 공유버튼을 눌러 결과이미지를 공유한다.
-            >             * 사용자는 공유버튼의 옵션 중 카카오톡/ 페이스북/ 인스타그램 버튼을 이용해서 공유이미지 링크를 확인하고 공유한다.
+>             * 사용자는 공유버튼의 옵션 중 카카오톡/ 페이스북/ 인스타그램 버튼을 이용해서 공유이미지 링크를 확인하고 공유한다.
 >         * 사용자는 이미지 저장 버튼을 눌러 결과를 저장한다.
 >         * 사용자는 결과값이 만족스럽지 않은 경우 백버튼(메인으로 이동)을 눌러 메인뷰로 재진입한다.
 >     * 시스템 스토리
-        >         * 시스템(클라이언트)은 시스템(백엔드서버)로 부터 반환받은 결과값을 정해진 protocol([“human”, “male_type”, “dsc”, “imgge(각 유형별 random 유명인 이미지)”])을 기반으로 rendering한다.
+>         * 시스템(클라이언트)은 시스템(백엔드서버)로 부터 반환받은 결과값을 정해진 protocol([“human”, “male_type”, “dsc”, “imgge(각 유형별 random 유명인 이미지)”])을 기반으로 rendering한다.
 >         * 시스템(클라이언트)은 결과를 공유한다.
-            >             * 카카오톡 / 문자 / Facebook / instagram
+>             * 카카오톡 / 문자 / Facebook / instagram
 
 
 ---
@@ -489,8 +489,6 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
 <p align="center">
     <img src="test_img/model_result.png">
 </p>
-
----
 ## 왜 Flutter를 사용하였는가? - KR
 어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다.
 그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다. 이유는 다음과 같습니다.
@@ -543,8 +541,8 @@ So why use Flutter instead of RN? Performance difference between RN and Flutter?
 
 ## 사용한 패키지(What package Pub?)
 > * Package
-    >   * Name : image_picker            version : ^0.8.6+1
-    >   * Name : intl                    version : ^0.17.0
+>   * Name : image_picker            version : ^0.8.6+1
+>   * Name : intl                    version : ^0.17.0
 >   * Name : share_plus              version : ^6.3.0
 >   * Name : screenshot              version : ^1.3.0
 >   * Name : path_provider           version : ^2.0.2
