@@ -218,7 +218,7 @@ class _SelectPageState extends State<SelectPage> {
         body: jsonEncode(
             {
               "first_user": {
-                "user_img":base64Image,
+                "user_img":await base64Image,
                 "age": selectedDate,
                 "mbti": selectedMBTI
               },
@@ -245,6 +245,8 @@ class _SelectPageState extends State<SelectPage> {
       resultData = data;
       dscsplit = resultData['dsc'];
     });
+
+    // await Future.delayed(const Duration(seconds: 3));
 
     if (!mounted) return;
     Navigator.of(context).pop();
