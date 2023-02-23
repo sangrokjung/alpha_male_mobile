@@ -175,8 +175,8 @@ class _SelectPageState extends State<SelectPage> {
   }
 
 
-  var testUrl = 'http://3.38.147.45:8000/api/RegisterUserImg_sample?Model_rst=5';
-  var serverUrl = "http://3.38.147.45:8000/api/RegisterResult";
+  var testUrl = 'http://15.165.49.6:8000/api/RegisterUserImg_sample?Model_rst=4';
+  var serverUrl = "http://15.165.49.6:8000/api/RegisterResult";
   var resultData;
   var dscsplit;
 
@@ -210,7 +210,7 @@ class _SelectPageState extends State<SelectPage> {
 
     List<int> imageBytes = widget.UserImagePath.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
-    Uri url = Uri.parse(testUrl);
+    Uri url = Uri.parse(serverUrl);
     http.Response response = await http.post(url,
         headers: <String, String>{
           'Content-Type': 'application/json; sharset=UTF-8',
@@ -456,16 +456,16 @@ class ResultPage extends StatelessWidget {
                       Divider(color: Colors.grey.shade900,height: 5),
                       Container(width:double.infinity,height: 400,color: Colors.transparent,child:ClipRRect(child: Image.file(UserImagePath,fit: BoxFit.fill))),
                       SizedBox(height: 20,),
-                      Container(color: Colors.transparent,alignment: Alignment.topCenter,width: 300,height: 100,child: Text(resultData['male_type'],style: TextStyle(fontSize: 70,color: Colors.white,fontFamily:"Amiri-Regular" ),)),
-                      SizedBox(height: 15,),
-                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      Container(color: Colors.transparent,alignment: Alignment.topCenter,child: Text(resultData['male_type'],style: TextStyle(fontSize: 100,color: Colors.white,fontFamily:"Amiri-Regular" ),)),
+                      SizedBox(height: 20,),
+                      Column(
                         children: [
-                          Text((" ·" + resultData['dsc'].split('·')[1]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
+                          Container(color: Colors.transparent,alignment: Alignment.centerLeft,margin: EdgeInsets.fromLTRB(33, 0, 33, 0),child: Text((" ·" + resultData['dsc'].split('·')[1]) ,style: TextStyle(fontSize: 16,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,)),
                           SizedBox(height: 15),
-                          Text((" ·" + resultData['dsc'].split('·')[2]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
+                          Container(color: Colors.transparent,alignment: Alignment.centerLeft,margin: EdgeInsets.fromLTRB(33, 0, 33, 0),child: Text((" ·" + resultData['dsc'].split('·')[2]) ,style: TextStyle(fontSize: 16,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,)),
                           SizedBox(height: 15),
-                          Text((" ·" + resultData['dsc'].split('·')[3]) ,style: TextStyle(fontSize: 25,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,),
-                          SizedBox(height: 10,),
+                          Container(color: Colors.transparent,alignment: Alignment.centerLeft,margin: EdgeInsets.fromLTRB(33, 0, 33, 0),child: Text((" ·" + resultData['dsc'].split('·')[3]) ,style: TextStyle(fontSize: 16,color: Colors.white,fontFamily: 'Amiri-Regular'),textAlign: TextAlign.left,)),
+                          SizedBox(height: 60,),
                         ],
                 ),
 
