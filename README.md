@@ -181,16 +181,16 @@
 6.If you want to try again with a different photo, Onpress the Home button in the upper left corner and go back to step 2 and try again.
 
 ## 사용한 패키지(What package Pub?)
-
-Name : image_picker            version : ^0.8.6+1
-Name : intl                    version : ^0.17.0
-Name : share_plus              version : ^6.3.0
-Name : screenshot              version : ^1.3.0
-Name : path_provider           version : ^2.0.2
-Name : carousel_slider         version : ^4.2.1
-Name : flutter_native_splash   version : ^2.2.17
-Name : gallery_saver           version : ^2.3.2
-Name : flutter_spinkit         version : ^5.1.0
+> * Package
+    >   * LeadName : image_picker            version : ^0.8.6+1
+>   * Name : intl                    version : ^0.17.0
+>   * Name : share_plus              version : ^6.3.0
+>   * Name : screenshot              version : ^1.3.0
+>   * Name : path_provider           version : ^2.0.2
+>   * Name : carousel_slider         version : ^4.2.1
+>   * Name : flutter_native_splash   version : ^2.2.17
+>   * Name : gallery_saver           version : ^2.3.2
+>   * Name : flutter_spinkit         version : ^5.1.0
 
 
 
