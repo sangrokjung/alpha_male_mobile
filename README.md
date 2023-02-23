@@ -168,9 +168,9 @@
 >     * 홈 버튼
 >     * 공유하기 버튼
 >     * 이미지 저장 버튼
->
->
->
+> 
+> 
+> 
 > Stories
 > * 메인(뷰)
 >     * 사용자 스토리
@@ -229,6 +229,8 @@
 
 
 ## 사전 설문조사
+**팀원들 각자의 외모에 대한 기준이 서로 상이함에 따라 외모 유형을 나누는데 어려움이 존재.<br>
+설문조사를 통해 많은 의견이 확보되면 누구나 어느정도 납득이 가능한 대중화된 데이터를 얻을수 있을 것을 기대함.**<br>
 
 <p align="center">
     <img src="test_img/pie_plot.png" height="400" width="400">
@@ -236,13 +238,25 @@
 <p align="center">
     <img src="test_img/plot (1).png" height="400" width="500"><br>
     <strong>사전 설문조사 결과 순위</strong>
-</p>
+</p><br>
+
+### 설문조사 기반의 데이터 분류 
+> 설문결과 유형 분포에 110을 곱하면(조사 대상 유명인의 수) 각 유형별로 몇명의 유명인이 들어가는지 확인 할 수 있다.<br>
+> 110 * 21.8 = 23.98 - Alpha <br>
+> 110 * 21.4 = 23.54 - Beta <br>
+> 110 * 22.5 = 24.75 - Gamma<br>
+> 110 * 19.2 = 21.12 - Delta<br>
+> 110 * 15.2 = 16.72 - Omega<br>
+> 각각을 반올림해서 합하면 24 +24 + 25 + 21 +17 = 111이므로 소수점 첫째자리가 0.5로부터 가장 차이가 적은 Beta에서 1명을 뺀다.<br>
+> 그러므로 설문조사 결과에는 Alpha : 24명, Beta : 23명, Gamma : 25명, Delta : 21명, Omega : 17명이 각각 분포한다고 판단 할 수 있다.<br>
+> 외모 점수를 높게 받은 순(차은우, 원빈, ……, 국민의 힘 김재원, 오지헌)으로 Alpha부터 Omega까지 유형 분류 결과를 낼 수 있다.<br>
+
+
 <p align="center">
     <img src="test_img/score_pie_plot.png" height="400" width=400"><br>
-    <strong>설문조사 결과 얼굴 유형별 분포도</strong>
 </p>
 
-## 유형 분류 결과
+### 유형 분류 결과
 > * Alpha : 차은우, 원빈, 현빈, 강동원, 뷔, 고수, 송강, 이동욱, 안정환 리즈, 서강준, 조인성, 정우성, 김수현, 공유, 박보검, 남주혁, 송중기, 송승헌, 임시완, 이종석, 정국, 장동건, 박형식
 > * Beta : 정해인, 소지섭, 이병헌, 주지훈, 김희철, 차승원, 지성, 이승기, 강하늘, 유아인, 안재현, 조정석, 은지원, 민경훈, 유연석, 김우빈, 이정재, 차인표, 김래원, 오지호, 이선균, 하정우, 조규성, 송민호
 > * Gamma : 침착맨, 지코, 조진웅, 황정민, 승리, 오정세, 류승룡, 이용진, 손흥민, 김종국, 류준열, 배우 김영철, 빅뱅 태양, 정우, 하하, 성시경, 송강호, 류승범, 기안84, 문재인, 윤도현, 유재석, 김동현, 이수근, 문상훈
@@ -253,7 +267,7 @@
 
 **Before building a DL server, build a backend server to develop protocols to send and receive with the Client.**
 
-### Structuring FastAPI
+### Structuring FastAPI 
 
 ```bash
 app
@@ -360,6 +374,30 @@ async def RegisterUserImg_sample(first_user: first_user_tbl, Model_rst:int, resu
 <p align="center">
     <img src="test_img/BACK-END_SERVER_CICD.PNG">
 </p>
+
+### Docker
+**The image was built based on python 3.10. <br>
+Packages that require installation were installed through requirements.**
+```dockerfile
+FROM python:3.10-alpine
+
+WORKDIR /app
+
+COPY ./requirements.txt /app/requirements.txt
+
+RUN echo $PATH
+RUN echo "export PATH=$PATH:/usr/local/bin/docker" >> ~/.bashrc
+RUN cat ~/.bashrc
+RUN echo $PATH
+
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+COPY . /app/
+
+CMD [ "uvicorn", "app.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "80" ]
+
+COPY ./ /app/
+```
 
 ## DL Server
 
@@ -472,9 +510,63 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
     <img src="test_img/DL_SERVER_Diagram.PNG">
 </p>
 
+### Docker
+**The image was built with Ubuntu-based python 3.10 version. <br>
+Packages that require installation were installed through requirements.**
+
+
+```dockerfile
+FROM ubuntu:latest
+
+WORKDIR /app
+
+COPY ./requirements.txt /app/requirements.txt
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libglib2.0-0 \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev
+
+RUN pip3 install opencv-python-headless
+
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+COPY . /app/
+
+CMD [ "uvicorn", "app.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "80" ]
+
+COPY ./ /app/
+```
 
 ## DataBase
 
+**user_tbl** <br>
+The table where the data entered by the USER will be stored.
+> * user_img_s3 : Address of s3 where USER IMG will be stored.
+> * user_img : USER IMG in base64 format.
+> * cft_result : USER's classification results.
+> * age : Date of birth of USER.
+> * mbti : USER's MBTI. <br>
+
+**male_tbl** <br>
+The data table to be sent to the Client based on the results of the DL MODEL.
+> * male_id : ID of the classification type.
+> * male_type : Type classification value.
+> * dsc_txt : Description values by type. <br>
+ 
+**img_tbl** <br>
+> * male_id : Type of image.
+> * url : IMG by type stored in base64 format.
 
 
 <p align="center">
@@ -489,6 +581,7 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
 <p align="center">
     <img src="test_img/model_result.png">
 </p>
+
 
 ## 왜 Flutter를 사용하였는가? - KR
 어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다.
