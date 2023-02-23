@@ -147,11 +147,35 @@
 
 ---
 
-## 프로젝트 기획이유
->   * 한 사람을 판단하는 기준으로써 외모는 과거부터 굉장히 중요한 역할을 해왔다.
->   * 현대 사회에 이르러 기술의 발달을 통해 사람들은 성형수술이나 피부과 시술, 화장품, 다이어트 등을 통해서 자기 자신을 더욱 아름답게 가꿀 수 있게 되었다.
->   * sns나 미디어 등 통신 매체의 발달로 자신의 아름다움을 타인에게 과시하기도 쉬워졌다.
->   * 이런 사회적 흐름 속에서 Alpha-male은 사용자의 얼굴을 객관적으로 판단할 수 있는 지표와 더 나은 사람이 되기위한 동기를 부여한다.
+## 프로젝트 기획이유 - KR
+>   * 한 사람을 판단하는 기준으로써 외모는 과거부터 굉장히 중요한 역할을 해왔습니다.
+>   * 현대 사회에 이르러 기술의 발달을 통해 사람들은 성형수술이나 피부과 시술, 화장품, 다이어트 등을 통해서 자기 자신을 더욱 아름답게 가꿀 수 있게 되었습니다.
+>   * SNS나 미디어 등 통신 매체의 발달로 자신의 아름다움을 타인에게 과시하기도 쉬워졌습니다.
+>   * 이런 사회적 흐름 속에서 Alpha-male은 사용자의 얼굴을 객관적으로 판단할 수 있는 지표와 더 나은 사람이 되기위한 동기를 부여합니다.
+ 
+## Reasons for planning the project  -EN
+>   * As a criterion for judging people, appearance has played a very important role since ancient times.
+>   * Modern society is making oneself more beautiful through plastic surgery, dermatology, beauty, diet, etc. with the development of technology.
+>   * With the development of communication media such as SNS and media, it has become easier to show off one's beauty to others.
+>   * In these social trends, alpha males provide indicators to objectively judge users' faces and motivate users to become better people.
+
+
+## 왜 Flutter를 사용하였는가?
+ 어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다. 그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다. 이유는 다음과 같습니다..
+ 
+ ### 1. 위젯
+    >   * Flutter는 Widget이란 것을 사용하여 진행합니다.
+    >   * 그렇다면 Widget이란 무엇이냐 Flutter에서 UI를 구성하는 모든 기본 요소를 말합니다.
+    >   * Widget을 사용하여 쉽고 빠르게 기능과 디자인을 진행 할 수 있습니다.
+ ### 2. 시간
+    >   * 우선 필자는 Flont쪽을 처음 접해보고 한달이라는 제한된 시간안에 프로젝트를 진행해야했습니다.
+    >   * 그러므로 쉽고 빠르게 디자인과 기능추가를하여 프로젝트를 완성하는것이 시간상 효율적이라 생각하였습니다.
+ ### 3. 인기도
+    >   * 마지막으로 바로 인기도입니다.
+    ![flutterlove](https://user-images.githubusercontent.com/113483259/220819372-347604a8-7e4c-4150-9bac-e41cdfc46ece.png)
+    ![rnlove](https://user-images.githubusercontent.com/113483259/220819375-1ae41dd9-b0f8-42cc-baae-8ed14bfbe00b.png)
+    
+    >   * 위 사진과 같이 Flutter가 RN에 비해 점유율과 인기도도 높고 이제는 공부용 보다는 사업에서도 많이들 선택한다하여 Flutter를 선택하게 되었습니다.
  
 
 
@@ -173,7 +197,6 @@
 
 ## 사용한 패키지(What package Pub?)
 > * Package
-    >   * Lead
 >   * Name : image_picker            version : ^0.8.6+1
 >   * Name : intl                    version : ^0.17.0
 >   * Name : share_plus              version : ^6.3.0
