@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "804149413178",
+    "project_id": "alpha-227bc",
+    "storage_bucket": "alpha-227bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804149413178:android:0acd2e62f8a6bfa2b97c03",
+        "android_client_info": {
+          "package_name": "com.playdata.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804149413178-77a4gdgt53ah17cj8vvpdkni4d5nr00o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEe4SevvUl61ZA-PfHg-p5qm6gCDBY_b0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804149413178-77a4gdgt53ah17cj8vvpdkni4d5nr00o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "804149413178-l5jt7ophu495v5a87mn3uop38g2nicbg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.playdata.test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
