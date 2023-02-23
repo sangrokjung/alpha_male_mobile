@@ -95,13 +95,10 @@ class MyApp extends StatefulWidget {
           Center(child:
           Column(children:[
 
-            ShowDeveloper(DvevloperImage:'assets/sang.jpg',giho:'γ',rule:'Team-Alpha: Back-End',classfi:'Gamma'),
+            // ShowDeveloper(DvevloperImage:'assets/sang.jpg',giho:'γ',rule:'Team-Alpha: Back-End',classfi:'Gamma'),
+            // ShowDeveloper(DvevloperImage:'assets/han.jpg',giho:'γ',rule: 'Team-Alpha: Front-End',classfi:'Gamma'),
+            // ShowDeveloper(DvevloperImage:'assets/won.jpg',giho:'δ',rule: 'Team-Alpha: ML/DL',classfi:'Delta'),
 
-
-            ShowDeveloper(DvevloperImage:'assets/han.jpg',giho:'γ',rule: 'Team-Alpha: Front-End',classfi:'Gamma'),
-
-
-            ShowDeveloper(DvevloperImage:'assets/won.jpg',giho:'δ',rule: 'Team-Alpha: ML/DL',classfi:'Delta'),
 
           ]),)],
 
