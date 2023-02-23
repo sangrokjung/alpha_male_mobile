@@ -96,24 +96,24 @@
 **SangRok Jung** : <a href="https://github.com/sangrokjung" target="_blank">github</a> - sesilao@naver.com
 > * Lead
     >   * Project Lead.
->   * Managing GitHub Repositories and Policies.
+    >   * Managing GitHub Repositories and Policies.
 >   * Notion, Upbase Management.
 >   * Manage schedules.
 >   * Planning and production of readme.
 > * Back-End
     >   * Imaging DL Servers with Dockers
->   * Leverage FastAPI to create POST Protocols for the Client to send.
+    >   * Leverage FastAPI to create POST Protocols for the Client to send.
 >   * Create an API to call DL.
 >   * Create an API that stores data sent by the Client in DB.
 >   * Connect with DataBase.
 > * Cloud
     >   * Building an EC2 Ubuntu environment for DL learning. (G4dn, P4)
->   * Deploying DL Server CICD with GitHub Actions and S3, EC2.
+    >   * Deploying DL Server CICD with GitHub Actions and S3, EC2.
 >   * Deploying Back-End Server CICD with GitHub Actions and ECR, ECS, and ELB.
 >   * Deploying RDBMS PostgreSQL using RDS.
 > * DataBase.
     >   *  Schema, table, and data CRUD utilizing PostgreSQL.
->   *  ERD Production.
+    >   *  ERD Production.
 > * Mobile
     >   * Design with Mockup.
 > * DL/ML
@@ -125,7 +125,7 @@
 **Seungwon Lee** : <a href="https://github.com/diet-teacher" target="_blank">github</a> - lsw4556@daum.net
 > * DL/ML
     >   * Collection of data through crawling.
->   * Analyse surveyed data and visualized it using matplotlib and pandas
+    >   * Analyse surveyed data and visualized it using matplotlib and pandas
 >   * Trained the first DL model to find out human face is exist using Pytorch
 >   * Trained the second DL model that for auto labeling using Pytorch
 >   * Trained the third DL model to detect three parts of faces and classify there class using Pytorch
@@ -135,7 +135,7 @@
     >   * Execute Leader's Command, Compliance with project rules.
 > * Mobile
     >   * Camera function and album function were activated using Image Picker.
->   * It makes a request to the server using HTTP and Post and responds with information.
+    >   * It makes a request to the server using HTTP and Post and responds with information.
 >   * Parse the data received as a response using HTTP and put
 >   * Give the user MainPage, SelectPage,Show the ResultPage.
 >   * Create the features required for each page.
@@ -152,7 +152,7 @@
 >   * 현대 사회에 이르러 기술의 발달을 통해 사람들은 성형수술이나 피부과 시술, 화장품, 다이어트 등을 통해서 자기 자신을 더욱 아름답게 가꿀 수 있게 되었습니다.
 >   * SNS나 미디어 등 통신 매체의 발달로 자신의 아름다움을 타인에게 과시하기도 쉬워졌습니다.
 >   * 이런 사회적 흐름 속에서 Alpha-male은 사용자의 얼굴을 객관적으로 판단할 수 있는 지표와 더 나은 사람이 되기위한 동기를 부여합니다.
- 
+
 ## Reasons for planning the project  -EN
 >   * As a criterion for judging people, appearance has played a very important role since ancient times.
 >   * Modern society is making oneself more beautiful through plastic surgery, dermatology, beauty, diet, etc. with the development of technology.
@@ -161,37 +161,39 @@
 
 
 ## 왜 Flutter를 사용하였는가? - KR
- 어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다. 그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다. 이유는 다음과 같습니다.
- 
- ### 1. 위젯
+어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다.
+그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다. 이유는 다음과 같습니다.
+
+### 1. 위젯
     >   * Flutter는 Widget이란 것을 사용하여 진행합니다.
     >   * 그렇다면 Widget이란 무엇이냐 Flutter에서 UI를 구성하는 모든 기본 요소를 말합니다.
     >   * Widget을 사용하여 쉽고 빠르게 기능과 디자인을 진행 할 수 있습니다.
- ### 2. 시간
+### 2. 시간
     >   * 우선 필자는 Front쪽을 처음 접해보고 한달이라는 제한된 시간안에 프로젝트를 진행해야했습니다.
     >   * 그러므로 쉽고 빠르게 디자인과 기능추가를하여 프로젝트를 완성하는것이 시간상 효율적이라 생각하였습니다.
- ### 3. 인기도
- 
- ![flutterlove](https://user-images.githubusercontent.com/113483259/220819372-347604a8-7e4c-4150-9bac-e41cdfc46ece.png)
- ![rnlove](https://user-images.githubusercontent.com/113483259/220819375-1ae41dd9-b0f8-42cc-baae-8ed14bfbe00b.png)
- 
- >   * 마지막으로 바로 인기도입니다.   
- >   * 위 사진과 같이 Flutter가 RN에 비해 점유율과 인기도도 높고 이제는 공부용 보다는 사업및 실제 프로젝트에서도 많이들 선택한다하여 Flutter를 선택하게 되었습니다.
+### 3. 인기도
+
+![flutterlove](https://user-images.githubusercontent.com/113483259/220819372-347604a8-7e4c-4150-9bac-e41cdfc46ece.png)
+![rnlove](https://user-images.githubusercontent.com/113483259/220819375-1ae41dd9-b0f8-42cc-baae-8ed14bfbe00b.png)
+
+>   * 마지막으로 바로 인기도입니다.
+>   * 위 사진과 같이 Flutter가 RN에 비해 점유율과 인기도도 높고 이제는 공부용 보다는 사업및 실제 프로젝트에서도 많이들 선택한다하여 Flutter를 선택하게 되었습니다.
 
 
 ## Why use Flutter? - EN
- RN(React Native) and Flutter are often used when creating applications. So why use Flutter instead of RN? Performance difference between RN and Flutter? no. Here's why.
+RN(React Native) and Flutter are often used when creating applications.
+So why use Flutter instead of RN? Performance difference between RN and Flutter? no. Here's why.
 
 ### 1. Widget
     >   * Flutter uses Widgets to proceed.
     >   * So, what is a Widget? It refers to all the basic elements that make up the UI in Flutter.
     >   * Can use widgets to design and develop features faster.
- ### 2. Time
+### 2. Time
     >   * First of all, I had to experience the Front side for the first time and proceed with the project within a limited time of a month.
     >   * Therefore, I thought that it would be more efficient in terms of time to complete the project by designing and adding functions quickly and easily.
- ### 3. Popularity
- >   * Last but not least is popularity.
- >   * As shown in the picture above, Flutter has a higher share and popularity than RN, and now it is chosen for business and real projects rather than for study, so I chose Flutter.
+### 3. Popularity
+>   * Last but not least is popularity.
+>   * As shown in the picture above, Flutter has a higher share and popularity than RN, and now it is chosen for business and real projects rather than for study, so I chose Flutter.
 
 ## 사용 방법   - KR
 1. 어플을 설치 후 실행시킨다.
