@@ -489,9 +489,11 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
 <p align="center">
     <img src="test_img/model_result.png">
 </p>
+
 ## 왜 Flutter를 사용하였는가? - KR
 어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다.
-그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다. 이유는 다음과 같습니다.
+그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다. 
+이유는 다음과 같습니다.
 
 ### 1. 위젯
     >   * Flutter는 Widget이란 것을 사용하여 진행합니다.
