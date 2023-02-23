@@ -147,6 +147,7 @@
 
 ---
 
+
 ## 왜 Flutter를 사용하였는가? - KR
 어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다.
 그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다. 이유는 다음과 같습니다.
@@ -167,7 +168,7 @@
 >   * 위 사진과 같이 Flutter가 RN에 비해 점유율과 인기도도 높고 이제는 공부용 보다는 사업및 실제 프로젝트에서도 많이들 선택한다하여 Flutter를 선택하게 되었습니다.
 
 
-## Why use Flutter? - EN
+## Why Use Flutter? - EN
 RN(React Native) and Flutter are often used when creating applications.
 So why use Flutter instead of RN? Performance difference between RN and Flutter? no. Here's why.
 
