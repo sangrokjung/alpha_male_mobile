@@ -173,7 +173,8 @@
 
 ## 사용한 패키지(What package Pub?)
 > * Package
-    >   * LeadName : image_picker            version : ^0.8.6+1
+    >   * Lead
+>   * Name : image_picker            version : ^0.8.6+1
 >   * Name : intl                    version : ^0.17.0
 >   * Name : share_plus              version : ^6.3.0
 >   * Name : screenshot              version : ^1.3.0
