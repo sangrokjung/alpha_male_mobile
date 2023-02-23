@@ -171,10 +171,11 @@
     >   * 우선 필자는 Flont쪽을 처음 접해보고 한달이라는 제한된 시간안에 프로젝트를 진행해야했습니다.
     >   * 그러므로 쉽고 빠르게 디자인과 기능추가를하여 프로젝트를 완성하는것이 시간상 효율적이라 생각하였습니다.
  ### 3. 인기도
-    >   * 마지막으로 바로 인기도입니다.
-    ![flutterlove](https://user-images.githubusercontent.com/113483259/220819372-347604a8-7e4c-4150-9bac-e41cdfc46ece.png)
-    ![rnlove](https://user-images.githubusercontent.com/113483259/220819375-1ae41dd9-b0f8-42cc-baae-8ed14bfbe00b.png)
-    
+ 
+ ![flutterlove](https://user-images.githubusercontent.com/113483259/220819372-347604a8-7e4c-4150-9bac-e41cdfc46ece.png)
+ ![rnlove](https://user-images.githubusercontent.com/113483259/220819375-1ae41dd9-b0f8-42cc-baae-8ed14bfbe00b.png)
+ 
+ >   * 마지막으로 바로 인기도입니다.   
     >   * 위 사진과 같이 Flutter가 RN에 비해 점유율과 인기도도 높고 이제는 공부용 보다는 사업에서도 많이들 선택한다하여 Flutter를 선택하게 되었습니다.
  
 
