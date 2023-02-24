@@ -1,0 +1,24 @@
+ flutter_native_splash:
+    color: "#000000"
+    image: assets/screen3.png
+    color_dark: "#000000"
+    image_dark: assets/screen3.png
+    fullscreen: true
+    web: false
+
+    android_12:
+      image: assets/screen3.png
+      icon_background_color: "#000000"
+      image_dark: assets/screen3.png
+      icon_background_color_dark: "#000000"
+      fullscreen: true
+      web: false
+
+
+
+#      android:name="io.flutter.embedding.android.SplashScreenDrawable"
+#      android:resource="@drawable/launch_background"
+
+
+# io.flutter.embedding.android.NormalTheme
+# @style/NormalTheme

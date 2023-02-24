@@ -16,10 +16,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 void main() async{
   runApp(
       MaterialApp(
+        debugShowCheckedModeBanner: false,
         home:MyApp(),
         theme:ThemeData(
-          appBarTheme: AppBarTheme(color: Colors.black), fontFamily: "Castoro-Regular",
-          textTheme: TextTheme(bodyText2: TextStyle(fontFamily: "Roboto-Regular"),),
+          appBarTheme: AppBarTheme(color: Colors.black), fontFamily: "Castoro-Regular",//Castoro-Regular
+          textTheme: TextTheme(bodyText2: TextStyle(fontFamily: "Roboto-Regular"),),//Roboto-Regular
           bottomAppBarTheme:BottomAppBarTheme(color: Colors.black),
           scaffoldBackgroundColor: Colors.black,
 
@@ -90,25 +91,31 @@ class MyApp extends StatefulWidget {
 
               }, icon: Icon(Icons.photo)),
             ],title: Text('Alpha-male',)),
-        body:ListView(children:[
-          SizedBox(height: 15,),
-          Center(child:
-          Column(children:[
+        body: Center(child:
+          Column(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+            Container(height: 250,color: Colors.transparent,child: Text('Alpha\nMale',style:TextStyle(height: 1.4,fontSize: 100,color: Colors.white,fontFamily: "Amiri-Regular",fontWeight: FontWeight.w700),textAlign: TextAlign.center),),
+            Container(color: Colors.transparent,child: Text('Made by. Team Alpha',style: TextStyle(fontSize: 14,color: Color(0xffe5e5e5),),textAlign: TextAlign.center),),
+            SizedBox(height: 50,),
+            Container(color: Colors.transparent,child: Text('사진을 입력하시오.',style: TextStyle(fontSize: 17,color: Color(
+                0xffE5E5E5)),textAlign: TextAlign.start),),
+
 
             // ShowDeveloper(DvevloperImage:'assets/sang.jpg',giho:'γ',rule:'Team-Alpha: Back-End',classfi:'Gamma'),
             // ShowDeveloper(DvevloperImage:'assets/han.jpg',giho:'γ',rule: 'Team-Alpha: Front-End',classfi:'Gamma'),
             // ShowDeveloper(DvevloperImage:'assets/won.jpg',giho:'δ',rule: 'Team-Alpha: ML/DL',classfi:'Delta'),
 
 
-          ]),)],
+          ]),
 
 
-        ),
+    ),
         bottomNavigationBar: BottomAppBar(
             child: Container(decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.grey,width: 0.3))),
               child: Text('\n"A man needs to be strong." - Alpha male',style:
               TextStyle(fontSize: 20,color: Colors.white,fontFamily: "FrankRuhlLibre-VariableFont_wght"),textAlign: TextAlign.center),
             ))
+
     );
   }
 }
@@ -172,8 +179,8 @@ class _SelectPageState extends State<SelectPage> {
   }
 
 
-  var testUrl = 'http://15.165.49.6:8000/api/RegisterUserImg_sample?Model_rst=4';
-  var serverUrl = "http://15.165.49.6:8000/api/RegisterResult";
+  var testUrl = 'http://3.36.102.207:8000/api/RegisterUserImg_sample?Model_rst=2';
+  var serverUrl = "http://3.36.102.207:8000/api/RegisterResult";
   var resultData;
   var dscsplit;
 
