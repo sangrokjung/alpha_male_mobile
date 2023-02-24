@@ -14,14 +14,37 @@
     </p>
 </div>
 
+<br>
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-project">About Project</a>
+    <li><a href="#tech-used">Tech Used</a>
+    <li><a href="#project-team">Project Team</a></li>
+    <li><a href="#user-stories">User Stories</a></li>
+    <li><a href="#survey">Survey</a></li>
+    <li><a href="#back-end-server">Back-End Server</a></li>
+    <li><a href="#dl-server">DL Server</a></li>
+    <li><a href="#data-base">Data Base</a></li>
+    <li><a href="#dl">DL</a></li>
+    <li><a href="#mobile">Mobile</a></li>
+  </ol>
+</details>
 
+<br>
+
+<!-- ABOUT PROJECT -->
 ## About Project
 
 <div>
     <p align="center">
-        <img src="test_img/view_1.png" width="200" height="410">
-        <img src="test_img/view_3.png" width="200" height="410">
+        <img src="test_img/v1.png" width="200" height="410">
+        <img src="test_img/alpha_result_v3.png" width="200" height="410">
+    </p>
+    <p align="center">
+        <img src="test_img/Client_diagrm.PNG" width="600" height="400">
     </p>
 </div>
 
@@ -47,9 +70,12 @@
 > **대한민국 20~30대 성인 남녀 100여명의 설문조사를 통해 얻은 데이터를 바탕으로 대한민국 남자 유명인 110명의 얼굴 유형을 분류.**<br>
 > **설문조사를 통해 분류된 유명인의 얼굴을 3분할(얼굴 전체, T-Zone, 하관)하여 FPN이 도입된 Faster RCNN 방식의 multi object detection model 학습.**<br>
 > **학습이 완료된 model을 통해 사용자의 얼굴 유형을 분석 후 결과 제공.**
+<<<<<<< HEAD
+=======
 
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 
-
+<!-- TECH USED -->
 ## TECH Used
 
 ### MOBILE
@@ -92,7 +118,7 @@
 
 
 
-
+<!-- PROJECT TEAM -->
 ## Project Team
 
 
@@ -144,9 +170,91 @@
 >   * Give the user MainPage, SelectPage,Show the ResultPage.
 >   * Create the features required for each page.
 >   * Designed the app logo.
+<<<<<<< HEAD
 >  * DL/ML
 >    * Collection of data through crawling.
+=======
+> * DL/ML
+>   * Collection of data through crawling.
+>   * Model Testing.
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 
+<!-- USER STORIES -->
+## User Stories
+> Epics
+> * 메인 (뷰)
+>     * 카메라 버튼
+>     * 갤러리 버튼
+> * 이미지 입력 (뷰)
+>     * 카메라
+>         * 카메라 촬영 버튼
+>     * 갤러리
+>         * 갤러리 사진 선택
+> * 이미지 로드 (뷰)
+>     * 카메라 촬영 결과 or 갤러리에서 선택 된 이미지
+>     * MBTI 인풋(메뉴 리스트)
+>     * 생년월일 인풋(calendar)
+>     * 분석 버튼 (비활성 : 회색, 활성 : 유색)
+>     * 뒤로 가기 버튼
+> * 결과(뷰)
+>     * 홈 버튼
+>     * 공유하기 버튼
+>     * 이미지 저장 버튼
+> 
+> 
+> 
+> Stories
+> * 메인(뷰)
+>     * 사용자 스토리
+>         * 사용자는 알파메일의 메인뷰에 진입한다.
+>         * 사용자는 카메라 버튼을 클릭한다.
+>         * 사용자는 갤러리 버튼은 클릭한다.
+>     * 시스템 스토리
+>         * 시스템(클라이언트)은 휴대폰 카메라에 연결한다.
+>         * 시스템(클라이언트)은 휴대폰 카메라에 연결한다.
+>         * 시스템(클라이언트)은 휴대폰 갤러리의 사진을 불러온다.
+> * 이미지 입력 (뷰)
+>     * 사용자 스토리
+>         * 카메라
+>             * 사용자는 카메라 촬영 버튼을 누른다.
+>             * 사용자는 뒤로 가기 버튼을 누른다.
+>                 * 사용자는 메인 뷰로 돌아간다.
+>         * 갤러리
+>             * 사용자는 사진을 선택한다.
+>             * 사용자는 뒤로 가기 버튼을 누른다.
+>                 * 사용자는 메인 뷰로 돌아간다.
+>     * 시스템 스토리
+>         * 시스템(클라이언트)은 사용자가 뒤로 가기 선택시 메인 뷰로 돌아간다.
+> * 이미지 로드 (뷰)
+>     * 사용자 스토리
+>         * 사용자는 자신의 이미지를 확인한다.
+>         * 사용자는 MBTI와 생년월일을 입력하지 않고 분석 버튼을 누른다.
+>             * 사용자는 알림창을 본다.
+>             * 사용자는 알림창을 터치하고 다시 데이터를 입력한다.
+>         * 사용자는 MBTI를 입력한다.
+>         * 사용자는 생년월일을 입력한다.
+>         * 사용자는 분석 버튼을 누른다.
+>     * 시스템 스토리
+>         * 시스템(클라이언트)은 사용자가 생년월일과 MBTI를 입력하지 않고 분석 버튼을 누를시 아무일도 발생시키지 않는다.
+>         * 시스템(클라이언트)은 사용자가 생년월일과 MBTI를 입력하고 분석 버튼을 누르면 사용자에게 로딩중 화면을 출력한다.
+>         * 시스템(클라이언트)은 사용자의 이미지를 base64 string type 변환하고 생년월일과 MBTI 데이터를 시스템(백엔드 서버)로 POST한다.
+>             * 시스템(벡엔드 서버)는 DL_model1을 통해 이미지에 사람 얼굴이 존재하는지 validation 한다.
+>                 * 시스템(벡엔드 서버)는 얼굴이 존재하지 않으면 시스템(클라이언트)에 에러를 response한다.
+>                     * 시스템(클라이언트)은 0을 response 받으면 “위와 같은 구도의 사진을 선택해 주세요.”라는 text와 사진 구도 예시 이미지를 출력한다.
+>                 * 시스템(벡엔드 서버)는 얼굴이 존재하면  DL_model2를 통해 얼굴 유형을 분석하고 AWS S3 버킷에 이미지를 저장한다.
+>                 * 시스템(백엔드 서버)는 최종 결과값[“human”, “male_type”, “dsc”, “imgge(각 유형별 random 유명인 이미지)”]을 시스템(클라이언트)에 response한다.
+> * 결과(뷰)
+>     * 사용자 스토리
+>         * 사용자는 선택한 이미지에 대한 결과를 확인한다.
+>         * 사용자는 결과에 대한 지표 상세 설명을 확인한다.
+>         * 사용자는 공유버튼을 눌러 결과이미지를 공유한다.
+>             * 사용자는 공유버튼의 옵션 중 카카오톡/ 페이스북/ 인스타그램 버튼을 이용해서 공유이미지 링크를 확인하고 공유한다.
+>         * 사용자는 이미지 저장 버튼을 눌러 결과를 저장한다.
+>         * 사용자는 결과값이 만족스럽지 않은 경우 백버튼(메인으로 이동)을 눌러 메인뷰로 재진입한다.
+>     * 시스템 스토리
+>         * 시스템(클라이언트)은 시스템(백엔드서버)로 부터 반환받은 결과값을 정해진 protocol([“human”, “male_type”, “dsc”, “imgge(각 유형별 random 유명인 이미지)”])을 기반으로 rendering한다.
+>         * 시스템(클라이언트)은 결과를 공유한다.
+>             * 카카오톡 / 문자 / Facebook / instagram
 
 ## User Stories
 > Epics
@@ -227,8 +335,15 @@
 
 ---
 
+<<<<<<< HEAD
 
 ## 사전 설문조사
+=======
+<!-- SURVEY -->
+## 사전 설문조사
+**팀원들 각자의 외모에 대한 기준이 서로 상이함에 따라 외모 유형을 나누는데 어려움이 존재.<br>
+설문조사를 통해 많은 의견이 확보되면 누구나 어느정도 납득이 가능한 대중화된 데이터를 얻을수 있을 것을 기대함.**<br>
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 
 <p align="center">
     <img src="test_img/pie_plot.png" height="400" width="400">
@@ -236,6 +351,7 @@
 <p align="center">
     <img src="test_img/plot (1).png" height="400" width="500"><br>
     <strong>사전 설문조사 결과 순위</strong>
+<<<<<<< HEAD
 </p>
 <p align="center">
     <img src="test_img/score_pie_plot.png" height="400" width=400"><br>
@@ -243,17 +359,47 @@
 </p>
 
 ## 유형 분류 결과
+=======
+</p><br>
+
+### 설문조사 기반의 데이터 분류 
+> 설문결과 유형 분포에 110을 곱하면(조사 대상 유명인의 수) 각 유형별로 몇명의 유명인이 들어가는지 확인 할 수 있다.<br>
+> 110 * 21.8 = 23.98 - Alpha <br>
+> 110 * 21.4 = 23.54 - Beta <br>
+> 110 * 22.5 = 24.75 - Gamma<br>
+> 110 * 19.2 = 21.12 - Delta<br>
+> 110 * 15.2 = 16.72 - Omega<br>
+> 각각을 반올림해서 합하면 24 +24 + 25 + 21 +17 = 111이므로 소수점 첫째자리가 0.5로부터 가장 차이가 적은 Beta에서 1명을 뺀다.<br>
+> 그러므로 설문조사 결과에는 Alpha : 24명, Beta : 23명, Gamma : 25명, Delta : 21명, Omega : 17명이 각각 분포한다고 판단 할 수 있다.<br>
+> 외모 점수를 높게 받은 순(차은우, 원빈, ……, 국민의 힘 김재원, 오지헌)으로 Alpha부터 Omega까지 유형 분류 결과를 낼 수 있다.<br>
+
+
+<p align="center">
+    <img src="test_img/score_pie_plot.png" height="400" width=400"><br>
+</p>
+
+### 유형 분류 결과
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 > * Alpha : 차은우, 원빈, 현빈, 강동원, 뷔, 고수, 송강, 이동욱, 안정환 리즈, 서강준, 조인성, 정우성, 김수현, 공유, 박보검, 남주혁, 송중기, 송승헌, 임시완, 이종석, 정국, 장동건, 박형식
 > * Beta : 정해인, 소지섭, 이병헌, 주지훈, 김희철, 차승원, 지성, 이승기, 강하늘, 유아인, 안재현, 조정석, 은지원, 민경훈, 유연석, 김우빈, 이정재, 차인표, 김래원, 오지호, 이선균, 하정우, 조규성, 송민호
 > * Gamma : 침착맨, 지코, 조진웅, 황정민, 승리, 오정세, 류승룡, 이용진, 손흥민, 김종국, 류준열, 배우 김영철, 빅뱅 태양, 정우, 하하, 성시경, 송강호, 류승범, 기안84, 문재인, 윤도현, 유재석, 김동현, 이수근, 문상훈
 > * Delta : 홍석천, 이준석, 유병재, 김풍, 강호동, 남창희, 유승민, 이진호, 마동석, 조세호, 피식대학 김민수, 주호민, 박지성, 윤석열, 이재명, 안철수, 장동민, 김범수, 이천수, 대성, 고창석
 > * Omega : 홍구, 오메가 사피엔, 진중권, 천하람, 미키광수, 최욱, 곽튜브, 딕헌터, 오달수, 흑자헬스, 변희재, 래퍼 면도, 염따, 김제동, 정종철, 국민의 힘 김재원, 오지헌
 
+<<<<<<< HEAD
+=======
+
+<!-- BACK-END SERVER -->
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 ## BACK-END SERVER
 
 **Before building a DL server, build a backend server to develop protocols to send and receive with the Client.**
 
+<<<<<<< HEAD
 ### Structuring FastAPI
+=======
+### Structuring FastAPI 
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 
 ```bash
 app
@@ -361,6 +507,35 @@ async def RegisterUserImg_sample(first_user: first_user_tbl, Model_rst:int, resu
     <img src="test_img/BACK-END_SERVER_CICD.PNG">
 </p>
 
+<<<<<<< HEAD
+=======
+### Docker
+**The image was built based on python 3.10. <br>
+Packages that require installation were installed through requirements.**
+```dockerfile
+FROM python:3.10-alpine
+
+WORKDIR /app
+
+COPY ./requirements.txt /app/requirements.txt
+
+RUN echo $PATH
+RUN echo "export PATH=$PATH:/usr/local/bin/docker" >> ~/.bashrc
+RUN cat ~/.bashrc
+RUN echo $PATH
+
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+COPY . /app/
+
+CMD [ "uvicorn", "app.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "80" ]
+
+COPY ./ /app/
+```
+
+
+<!-- DL SERVER -->
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 ## DL Server
 
 **When the client calls the server's API, the result value is stored in the DB and S3 Bucket through DL MODEL learned and the response body is returned to the client.**
@@ -471,18 +646,86 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
 <p align="center">
     <img src="test_img/DL_SERVER_Diagram.PNG">
 </p>
+<<<<<<< HEAD
 
 
 ## DataBase
 
 
 
+=======
+
+### Docker
+**The image was built with Ubuntu-based python 3.10 version. <br>
+Packages that require installation were installed through requirements.**
+
+
+```dockerfile
+FROM ubuntu:latest
+
+WORKDIR /app
+
+COPY ./requirements.txt /app/requirements.txt
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libglib2.0-0 \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev
+
+RUN pip3 install opencv-python-headless
+
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+COPY . /app/
+
+CMD [ "uvicorn", "app.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "80" ]
+
+COPY ./ /app/
+```
+
+<!-- DATA BASE -->
+## DataBase
+
+**user_tbl** <br>
+The table where the data entered by the USER will be stored.
+> * user_img_s3 : Address of s3 where USER IMG will be stored.
+> * user_img : USER IMG in base64 format.
+> * cft_result : USER's classification results.
+> * age : Date of birth of USER.
+> * mbti : USER's MBTI. <br>
+
+**male_tbl** <br>
+The data table to be sent to the Client based on the results of the DL MODEL.
+> * male_id : ID of the classification type.
+> * male_type : Type classification value.
+> * dsc_txt : Description values by type. <br>
+ 
+**img_tbl** <br>
+> * male_id : Type of image.
+> * url : IMG by type stored in base64 format.
+
+
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 <p align="center">
     <img src="test_img/ERD.png">
 </p>
 
 
 
+<<<<<<< HEAD
+=======
+<!-- DL -->
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 ## DL
 
 ### 
@@ -490,6 +733,7 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
     <img src="test_img/model_result.png">
 </p>
 
+<<<<<<< HEAD
 ## 왜 Flutter를 사용하였는가? - KR
 어플을 제작하려고 할때 많이 사용하는것이 바로 RN(React Native)와 Flutter입니다.
 그렇다면 필자는 왜 RN을 사용하지 않고 Flutter를 사용하여 제작하였냐면 RN과 Flutter의 성능차이? 아닙니다.
@@ -511,6 +755,23 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
 >   * 위 사진과 같이 Flutter가 RN에 비해 점유율과 인기도도 높고 이제는 공부용 보다는 사업및 실제 프로젝트에서도 많이들 선택한다하여 Flutter를 선택하게 되었습니다.
 
 ## 사용 방법   - KR
+=======
+<!-- MOBILE -->
+## Mobile
+### Flutter를 사용한 이유.
+### 1. 위젯
+>   * Widget이란 Flutter에서 UI를 구성하는 모든 기본 요소를 말한다
+>   * Flutter는 Widget을 사용하여 쉽고 빠르게 기능과 디자인을 진행 할 수 있다.
+### 2. 시간
+>   * 처음 접하는 앱 개발이라는 분야를 제한된 한달 동안 완성 해야한다.
+>   * 쉽고 빠른 Flutter를 사용하는것이 적합하다.
+### 3. 선호도
+![flutterlove](https://user-images.githubusercontent.com/113483259/220819372-347604a8-7e4c-4150-9bac-e41cdfc46ece.png)
+![rnlove](https://user-images.githubusercontent.com/113483259/220819375-1ae41dd9-b0f8-42cc-baae-8ed14bfbe00b.png)
+>   * Flutter가 RN에 비해 점유율과 선호도가 높으며 실제 사업및 실제 프로젝트에서 사용중이다.
+
+## 사용 방법
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 1. 어플을 설치 후 실행시킨다.
 2. 오른쪽 상단 Appbar에 있는 카메라,앨범 아이콘 버튼을 눌러 상체 위로 나오는 촬영 및 사진 선택을 한다.
 3. 촬영 및 사진선택후 선택페이지에서 MBTI,Birth,연봉을 입력 후 분석버튼을 누른다.
@@ -518,7 +779,11 @@ async def RegisterResult(first_user: first_user_tbl, result: last_result, db: Se
 5. 본인 정보를 확인하였으면 오른쪽 상단 스크린샷,공유 버튼을 눌러 앨범으로 저장 또는 SNS로 공유를 한다.
 6. 다른 사진으로 다시 도전하고 싶다면 왼쪽 상단 집 모양 아이콘버튼을 누른후 2번으로 돌아가 다시 시도한다.
 
+<<<<<<< HEAD
 ## Why Use Flutter? - EN
+=======
+## Why Use Flutter?
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 RN(React Native) and Flutter are often used when creating applications.
 So why use Flutter instead of RN? Performance difference between RN and Flutter? no. Here's why.
 
@@ -533,7 +798,11 @@ So why use Flutter instead of RN? Performance difference between RN and Flutter?
 >   * Last but not least is popularity.
 >   * As shown in the picture above, Flutter has a higher share and popularity than RN, and now it is chosen for business and real projects rather than for study, so I chose Flutter.
 
+<<<<<<< HEAD
 ## How to Use? - EN
+=======
+## How to Use?
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
 1. First installing the app, launch it.
 2. Take a photo by pressing the camera or album icon button on the top right app bar, or select a photo that shows your torso.
 3. After photo and selection, enter MBTI, Birth, and annual salary on the selection page and press the analysis button.
@@ -541,6 +810,7 @@ So why use Flutter instead of RN? Performance difference between RN and Flutter?
 5. If you have confirmed your information, click the screenshot and share button at the top right to save it as an album or share it on social media.
 6. If you want to try again with a different photo, Onpress the Home button in the upper left corner and go back to step 2 and try again.
 
+<<<<<<< HEAD
 ## 사용한 패키지(What package Pub?)
 > * Package
 >   * Name : image_picker            version : ^0.8.6+1
@@ -552,3 +822,15 @@ So why use Flutter instead of RN? Performance difference between RN and Flutter?
 >   * Name : flutter_native_splash   version : ^2.2.17
 >   * Name : gallery_saver           version : ^2.3.2
 >   * Name : flutter_spinkit         version : ^5.1.0
+=======
+## 사용 패키지(What package Pub?)
+>* Name : image_picker            version : ^0.8.6+1
+>* Name : intl                    version : ^0.17.0
+>* Name : share_plus              version : ^6.3.0
+>* Name : screenshot              version : ^1.3.0
+>* Name : path_provider           version : ^2.0.2
+>* Name : carousel_slider         version : ^4.2.1
+>* Name : flutter_native_splash   version : ^2.2.17
+>* Name : gallery_saver           version : ^2.3.2
+>* Name : flutter_spinkit         version : ^5.1.0
+>>>>>>> 01861d2e5c59dbebf9546113440a1cdb578f8612
